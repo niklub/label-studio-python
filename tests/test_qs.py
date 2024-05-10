@@ -4,7 +4,7 @@ from urllib.parse import unquote
 
 import pytest
 
-from petstore._qs import Querystring, stringify
+from label_studio._qs import Querystring, stringify
 
 
 def test_empty() -> None:

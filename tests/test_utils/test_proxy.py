@@ -2,7 +2,7 @@ import operator
 from typing import Any
 from typing_extensions import override
 
-from petstore._utils import LazyProxy
+from label_studio._utils import LazyProxy
 
 
 class RecursiveLazyProxy(LazyProxy[Any]):
