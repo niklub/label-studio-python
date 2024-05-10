@@ -1,62 +1,193 @@
-# Shared Types
-
-```python
-from petstore.types import Order
-```
-
-# Pets
+# AnnotationHistory
 
 Types:
 
 ```python
-from petstore.types import APIResponse, Pet, PetFindByStatusResponse, PetFindByTagsResponse
+from label_studio.types import AnnotationHistory, AnnotationHistoryListResponse
 ```
 
 Methods:
 
-- <code title="post /pet">client.pets.<a href="./src/petstore/resources/pets.py">create</a>(\*\*<a href="src/petstore/types/pet_create_params.py">params</a>) -> <a href="./src/petstore/types/pet.py">Pet</a></code>
-- <code title="get /pet/{petId}">client.pets.<a href="./src/petstore/resources/pets.py">retrieve</a>(pet_id) -> <a href="./src/petstore/types/pet.py">Pet</a></code>
-- <code title="put /pet">client.pets.<a href="./src/petstore/resources/pets.py">update</a>(\*\*<a href="src/petstore/types/pet_update_params.py">params</a>) -> <a href="./src/petstore/types/pet.py">Pet</a></code>
-- <code title="delete /pet/{petId}">client.pets.<a href="./src/petstore/resources/pets.py">delete</a>(pet_id) -> None</code>
-- <code title="get /pet/findByStatus">client.pets.<a href="./src/petstore/resources/pets.py">find_by_status</a>(\*\*<a href="src/petstore/types/pet_find_by_status_params.py">params</a>) -> <a href="./src/petstore/types/pet_find_by_status_response.py">PetFindByStatusResponse</a></code>
-- <code title="get /pet/findByTags">client.pets.<a href="./src/petstore/resources/pets.py">find_by_tags</a>(\*\*<a href="src/petstore/types/pet_find_by_tags_params.py">params</a>) -> <a href="./src/petstore/types/pet_find_by_tags_response.py">PetFindByTagsResponse</a></code>
-- <code title="post /pet/{petId}">client.pets.<a href="./src/petstore/resources/pets.py">update_by_id</a>(pet_id, \*\*<a href="src/petstore/types/pet_update_by_id_params.py">params</a>) -> None</code>
-- <code title="post /pet/{petId}/uploadImage">client.pets.<a href="./src/petstore/resources/pets.py">upload_image</a>(pet_id, \*\*<a href="src/petstore/types/pet_upload_image_params.py">params</a>) -> <a href="./src/petstore/types/api_response.py">APIResponse</a></code>
+- <code title="get /api/annotation-history/">client.annotation_history.<a href="./src/label_studio/resources/annotation_history.py">list</a>(\*\*<a href="src/label_studio/types/annotation_history_list_params.py">params</a>) -> <a href="./src/label_studio/types/annotation_history_list_response.py">AnnotationHistoryListResponse</a></code>
+- <code title="delete /api/annotation-history/">client.annotation_history.<a href="./src/label_studio/resources/annotation_history.py">delete</a>(\*\*<a href="src/label_studio/types/annotation_history_delete_params.py">params</a>) -> None</code>
 
-# Store
+# AnnotationReviews
 
 Types:
 
 ```python
-from petstore.types import StoreInventoryResponse
+from label_studio.types import AnnotationReview, AnnotationReviewListResponse
 ```
 
 Methods:
 
-- <code title="post /store/order">client.store.<a href="./src/petstore/resources/store/store.py">create_order</a>(\*\*<a href="src/petstore/types/store_create_order_params.py">params</a>) -> <a href="./src/petstore/types/shared/order.py">Order</a></code>
-- <code title="get /store/inventory">client.store.<a href="./src/petstore/resources/store/store.py">inventory</a>() -> <a href="./src/petstore/types/store_inventory_response.py">StoreInventoryResponse</a></code>
+- <code title="post /api/annotation-reviews/">client.annotation_reviews.<a href="./src/label_studio/resources/annotation_reviews.py">create</a>(\*\*<a href="src/label_studio/types/annotation_review_create_params.py">params</a>) -> <a href="./src/label_studio/types/annotation_review.py">AnnotationReview</a></code>
+- <code title="get /api/annotation-reviews/{id}/">client.annotation_reviews.<a href="./src/label_studio/resources/annotation_reviews.py">retrieve</a>(id) -> <a href="./src/label_studio/types/annotation_review.py">AnnotationReview</a></code>
+- <code title="patch /api/annotation-reviews/{id}/">client.annotation_reviews.<a href="./src/label_studio/resources/annotation_reviews.py">update</a>(id, \*\*<a href="src/label_studio/types/annotation_review_update_params.py">params</a>) -> <a href="./src/label_studio/types/annotation_review.py">AnnotationReview</a></code>
+- <code title="get /api/annotation-reviews/">client.annotation_reviews.<a href="./src/label_studio/resources/annotation_reviews.py">list</a>(\*\*<a href="src/label_studio/types/annotation_review_list_params.py">params</a>) -> <a href="./src/label_studio/types/annotation_review_list_response.py">AnnotationReviewListResponse</a></code>
+- <code title="delete /api/annotation-reviews/{id}/">client.annotation_reviews.<a href="./src/label_studio/resources/annotation_reviews.py">delete</a>(id) -> None</code>
+- <code title="put /api/annotation-reviews/{id}/">client.annotation_reviews.<a href="./src/label_studio/resources/annotation_reviews.py">overwrite</a>(id, \*\*<a href="src/label_studio/types/annotation_review_overwrite_params.py">params</a>) -> <a href="./src/label_studio/types/annotation_review.py">AnnotationReview</a></code>
 
-## Order
-
-Methods:
-
-- <code title="get /store/order/{orderId}">client.store.order.<a href="./src/petstore/resources/store/order.py">retrieve</a>(order_id) -> <a href="./src/petstore/types/shared/order.py">Order</a></code>
-- <code title="delete /store/order/{orderId}">client.store.order.<a href="./src/petstore/resources/store/order.py">delete_order</a>(order_id) -> None</code>
-
-# User
+# Annotations
 
 Types:
 
 ```python
-from petstore.types import User, UserLoginResponse
+from label_studio.types import Annotation
 ```
 
 Methods:
 
-- <code title="post /user">client.user.<a href="./src/petstore/resources/user.py">create</a>(\*\*<a href="src/petstore/types/user_create_params.py">params</a>) -> None</code>
-- <code title="get /user/{username}">client.user.<a href="./src/petstore/resources/user.py">retrieve</a>(username) -> <a href="./src/petstore/types/user.py">User</a></code>
-- <code title="put /user/{username}">client.user.<a href="./src/petstore/resources/user.py">update</a>(existing_username, \*\*<a href="src/petstore/types/user_update_params.py">params</a>) -> None</code>
-- <code title="delete /user/{username}">client.user.<a href="./src/petstore/resources/user.py">delete</a>(username) -> None</code>
-- <code title="post /user/createWithList">client.user.<a href="./src/petstore/resources/user.py">create_with_list</a>(\*\*<a href="src/petstore/types/user_create_with_list_params.py">params</a>) -> <a href="./src/petstore/types/user.py">User</a></code>
-- <code title="get /user/login">client.user.<a href="./src/petstore/resources/user.py">login</a>(\*\*<a href="src/petstore/types/user_login_params.py">params</a>) -> str</code>
-- <code title="get /user/logout">client.user.<a href="./src/petstore/resources/user.py">logout</a>() -> None</code>
+- <code title="get /api/annotations/{id}/">client.annotations.<a href="./src/label_studio/resources/annotations.py">retrieve</a>(id) -> <a href="./src/label_studio/types/annotation.py">Annotation</a></code>
+- <code title="patch /api/annotations/{id}/">client.annotations.<a href="./src/label_studio/resources/annotations.py">update</a>(id, \*\*<a href="src/label_studio/types/annotation_update_params.py">params</a>) -> <a href="./src/label_studio/types/annotation.py">Annotation</a></code>
+- <code title="delete /api/annotations/{id}/">client.annotations.<a href="./src/label_studio/resources/annotations.py">delete</a>(id) -> None</code>
+
+# Comments
+
+Types:
+
+```python
+from label_studio.types import Comment, CommentListResponse
+```
+
+Methods:
+
+- <code title="post /api/comments/">client.comments.<a href="./src/label_studio/resources/comments.py">create</a>(\*\*<a href="src/label_studio/types/comment_create_params.py">params</a>) -> <a href="./src/label_studio/types/comment.py">Comment</a></code>
+- <code title="get /api/comments/{id}/">client.comments.<a href="./src/label_studio/resources/comments.py">retrieve</a>(id) -> <a href="./src/label_studio/types/comment.py">Comment</a></code>
+- <code title="patch /api/comments/{id}/">client.comments.<a href="./src/label_studio/resources/comments.py">update</a>(id, \*\*<a href="src/label_studio/types/comment_update_params.py">params</a>) -> <a href="./src/label_studio/types/comment.py">Comment</a></code>
+- <code title="get /api/comments/">client.comments.<a href="./src/label_studio/resources/comments.py">list</a>(\*\*<a href="src/label_studio/types/comment_list_params.py">params</a>) -> <a href="./src/label_studio/types/comment_list_response.py">CommentListResponse</a></code>
+- <code title="delete /api/comments/{id}/">client.comments.<a href="./src/label_studio/resources/comments.py">delete</a>(id) -> None</code>
+- <code title="put /api/comments/{id}/">client.comments.<a href="./src/label_studio/resources/comments.py">overwrite</a>(id, \*\*<a href="src/label_studio/types/comment_overwrite_params.py">params</a>) -> <a href="./src/label_studio/types/comment.py">Comment</a></code>
+
+# CurrentUser
+
+Types:
+
+```python
+from label_studio.types import LseUser, CurrentUserResetTokenResponse
+```
+
+Methods:
+
+- <code title="get /api/current-user/whoami">client.current_user.<a href="./src/label_studio/resources/current_user.py">retrieve</a>() -> <a href="./src/label_studio/types/lse_user.py">LseUser</a></code>
+- <code title="post /api/current-user/reset-token/">client.current_user.<a href="./src/label_studio/resources/current_user.py">reset_token</a>() -> <a href="./src/label_studio/types/current_user_reset_token_response.py">CurrentUserResetTokenResponse</a></code>
+- <code title="get /api/current-user/token">client.current_user.<a href="./src/label_studio/resources/current_user.py">retrieve_token</a>() -> None</code>
+
+# API
+
+## Dashboards
+
+### Organizations
+
+#### Charts
+
+##### SeriesKey
+
+Methods:
+
+- <code title="get /api/dashboards/organizations/{id}/charts/{chart_key}/{series_key}">client.api.dashboards.organizations.charts.series_key.<a href="./src/label_studio/resources/api/dashboards/organizations/charts/series_key.py">retrieve</a>(series_key, \*, id, chart_key) -> None</code>
+
+## DatasetStorages
+
+Methods:
+
+- <code title="get /api/dataset-storages/">client.api.dataset_storages.<a href="./src/label_studio/resources/api/dataset_storages/dataset_storages.py">list</a>(\*\*<a href="src/label_studio/types/api/dataset_storage_list_params.py">params</a>) -> None</code>
+
+### Azure
+
+Types:
+
+```python
+from label_studio.types.api.dataset_storages import AzureDatasetStorage, AzureListResponse
+```
+
+Methods:
+
+- <code title="post /api/dataset-storages/azure/">client.api.dataset_storages.azure.<a href="./src/label_studio/resources/api/dataset_storages/azure/azure.py">create</a>(\*\*<a href="src/label_studio/types/api/dataset_storages/azure_create_params.py">params</a>) -> <a href="./src/label_studio/types/api/dataset_storages/azure_dataset_storage.py">AzureDatasetStorage</a></code>
+- <code title="get /api/dataset-storages/azure/{id}/">client.api.dataset_storages.azure.<a href="./src/label_studio/resources/api/dataset_storages/azure/azure.py">retrieve</a>(id) -> <a href="./src/label_studio/types/api/dataset_storages/azure_dataset_storage.py">AzureDatasetStorage</a></code>
+- <code title="patch /api/dataset-storages/azure/{id}/">client.api.dataset_storages.azure.<a href="./src/label_studio/resources/api/dataset_storages/azure/azure.py">update</a>(id, \*\*<a href="src/label_studio/types/api/dataset_storages/azure_update_params.py">params</a>) -> <a href="./src/label_studio/types/api/dataset_storages/azure_dataset_storage.py">AzureDatasetStorage</a></code>
+- <code title="get /api/dataset-storages/azure/">client.api.dataset_storages.azure.<a href="./src/label_studio/resources/api/dataset_storages/azure/azure.py">list</a>(\*\*<a href="src/label_studio/types/api/dataset_storages/azure_list_params.py">params</a>) -> <a href="./src/label_studio/types/api/dataset_storages/azure_list_response.py">AzureListResponse</a></code>
+- <code title="delete /api/dataset-storages/azure/{id}/">client.api.dataset_storages.azure.<a href="./src/label_studio/resources/api/dataset_storages/azure/azure.py">delete</a>(id) -> None</code>
+- <code title="post /api/dataset-storages/azure/check-for-records/">client.api.dataset_storages.azure.<a href="./src/label_studio/resources/api/dataset_storages/azure/azure.py">check_for_records</a>(\*\*<a href="src/label_studio/types/api/dataset_storages/azure_check_for_records_params.py">params</a>) -> <a href="./src/label_studio/types/api/dataset_storages/azure_dataset_storage.py">AzureDatasetStorage</a></code>
+- <code title="post /api/dataset-storages/azure/validate/">client.api.dataset_storages.azure.<a href="./src/label_studio/resources/api/dataset_storages/azure/azure.py">validate</a>(\*\*<a href="src/label_studio/types/api/dataset_storages/azure_validate_params.py">params</a>) -> <a href="./src/label_studio/types/api/dataset_storages/azure_dataset_storage.py">AzureDatasetStorage</a></code>
+
+#### Columns
+
+Methods:
+
+- <code title="get /api/dataset-storages/azure/{id}/columns/">client.api.dataset_storages.azure.columns.<a href="./src/label_studio/resources/api/dataset_storages/azure/columns.py">list</a>(id, \*\*<a href="src/label_studio/types/api/dataset_storages/azure/column_list_params.py">params</a>) -> None</code>
+
+### Gcs
+
+Types:
+
+```python
+from label_studio.types.api.dataset_storages import GcsDatasetStorage
+```
+
+### S3
+
+Types:
+
+```python
+from label_studio.types.api.dataset_storages import S3DatasetStorage
+```
+
+# DatasetStorages
+
+## Azure
+
+Methods:
+
+- <code title="post /api/dataset-storages/azure/{id}/sync/">client.dataset_storages.azure.<a href="./src/label_studio/resources/dataset_storages/azure.py">sync</a>(id, \*\*<a href="src/label_studio/types/dataset_storages/azure_sync_params.py">params</a>) -> <a href="./src/label_studio/types/api/dataset_storages/azure_dataset_storage.py">AzureDatasetStorage</a></code>
+
+## Gcs
+
+Types:
+
+```python
+from label_studio.types.dataset_storages import GcListResponse
+```
+
+Methods:
+
+- <code title="post /api/dataset-storages/gcs/">client.dataset_storages.gcs.<a href="./src/label_studio/resources/dataset_storages/gcs/gcs.py">create</a>(\*\*<a href="src/label_studio/types/dataset_storages/gc_create_params.py">params</a>) -> <a href="./src/label_studio/types/api/dataset_storages/gcs_dataset_storage.py">GcsDatasetStorage</a></code>
+- <code title="get /api/dataset-storages/gcs/{id}/">client.dataset_storages.gcs.<a href="./src/label_studio/resources/dataset_storages/gcs/gcs.py">retrieve</a>(id) -> <a href="./src/label_studio/types/api/dataset_storages/gcs_dataset_storage.py">GcsDatasetStorage</a></code>
+- <code title="patch /api/dataset-storages/gcs/{id}/">client.dataset_storages.gcs.<a href="./src/label_studio/resources/dataset_storages/gcs/gcs.py">update</a>(id, \*\*<a href="src/label_studio/types/dataset_storages/gc_update_params.py">params</a>) -> <a href="./src/label_studio/types/api/dataset_storages/gcs_dataset_storage.py">GcsDatasetStorage</a></code>
+- <code title="get /api/dataset-storages/gcs/">client.dataset_storages.gcs.<a href="./src/label_studio/resources/dataset_storages/gcs/gcs.py">list</a>(\*\*<a href="src/label_studio/types/dataset_storages/gc_list_params.py">params</a>) -> <a href="./src/label_studio/types/dataset_storages/gc_list_response.py">GcListResponse</a></code>
+- <code title="delete /api/dataset-storages/gcs/{id}/">client.dataset_storages.gcs.<a href="./src/label_studio/resources/dataset_storages/gcs/gcs.py">delete</a>(id) -> None</code>
+- <code title="post /api/dataset-storages/gcs/check-for-records/">client.dataset_storages.gcs.<a href="./src/label_studio/resources/dataset_storages/gcs/gcs.py">check_for_records</a>(\*\*<a href="src/label_studio/types/dataset_storages/gc_check_for_records_params.py">params</a>) -> <a href="./src/label_studio/types/api/dataset_storages/gcs_dataset_storage.py">GcsDatasetStorage</a></code>
+- <code title="post /api/dataset-storages/gcs/{id}/sync/">client.dataset_storages.gcs.<a href="./src/label_studio/resources/dataset_storages/gcs/gcs.py">sync</a>(id, \*\*<a href="src/label_studio/types/dataset_storages/gc_sync_params.py">params</a>) -> <a href="./src/label_studio/types/api/dataset_storages/gcs_dataset_storage.py">GcsDatasetStorage</a></code>
+- <code title="post /api/dataset-storages/gcs/validate/">client.dataset_storages.gcs.<a href="./src/label_studio/resources/dataset_storages/gcs/gcs.py">validate</a>(\*\*<a href="src/label_studio/types/dataset_storages/gc_validate_params.py">params</a>) -> <a href="./src/label_studio/types/api/dataset_storages/gcs_dataset_storage.py">GcsDatasetStorage</a></code>
+
+### Columns
+
+Methods:
+
+- <code title="get /api/dataset-storages/gcs/{id}/columns/">client.dataset_storages.gcs.columns.<a href="./src/label_studio/resources/dataset_storages/gcs/columns.py">list</a>(id, \*\*<a href="src/label_studio/types/dataset_storages/gcs/column_list_params.py">params</a>) -> None</code>
+
+# DatasetStoragesS3
+
+Types:
+
+```python
+from label_studio.types import DatasetStoragesS3ListResponse
+```
+
+Methods:
+
+- <code title="post /api/dataset-storages/s3/">client.dataset_storages_s3.<a href="./src/label_studio/resources/dataset_storages_s3.py">create</a>(\*\*<a href="src/label_studio/types/dataset_storages_s3_create_params.py">params</a>) -> <a href="./src/label_studio/types/api/dataset_storages/s3_dataset_storage.py">S3DatasetStorage</a></code>
+- <code title="get /api/dataset-storages/s3/{id}/">client.dataset_storages_s3.<a href="./src/label_studio/resources/dataset_storages_s3.py">retrieve</a>(id) -> <a href="./src/label_studio/types/api/dataset_storages/s3_dataset_storage.py">S3DatasetStorage</a></code>
+- <code title="patch /api/dataset-storages/s3/{id}/">client.dataset_storages_s3.<a href="./src/label_studio/resources/dataset_storages_s3.py">update</a>(id, \*\*<a href="src/label_studio/types/dataset_storages_s3_update_params.py">params</a>) -> <a href="./src/label_studio/types/api/dataset_storages/s3_dataset_storage.py">S3DatasetStorage</a></code>
+- <code title="get /api/dataset-storages/s3/">client.dataset_storages_s3.<a href="./src/label_studio/resources/dataset_storages_s3.py">list</a>(\*\*<a href="src/label_studio/types/dataset_storages_s3_list_params.py">params</a>) -> <a href="./src/label_studio/types/dataset_storages_s3_list_response.py">DatasetStoragesS3ListResponse</a></code>
+- <code title="delete /api/dataset-storages/s3/{id}/">client.dataset_storages_s3.<a href="./src/label_studio/resources/dataset_storages_s3.py">delete</a>(id) -> None</code>
+- <code title="post /api/dataset-storages/s3/check-for-records/">client.dataset_storages_s3.<a href="./src/label_studio/resources/dataset_storages_s3.py">check_for_records</a>(\*\*<a href="src/label_studio/types/dataset_storages_s3_check_for_records_params.py">params</a>) -> <a href="./src/label_studio/types/api/dataset_storages/s3_dataset_storage.py">S3DatasetStorage</a></code>
+- <code title="get /api/dataset-storages/s3/{id}/columns/">client.dataset_storages_s3.<a href="./src/label_studio/resources/dataset_storages_s3.py">columns</a>(id, \*\*<a href="src/label_studio/types/dataset_storages_s3_columns_params.py">params</a>) -> None</code>
+- <code title="post /api/dataset-storages/s3/{id}/sync/">client.dataset_storages_s3.<a href="./src/label_studio/resources/dataset_storages_s3.py">sync</a>(id, \*\*<a href="src/label_studio/types/dataset_storages_s3_sync_params.py">params</a>) -> <a href="./src/label_studio/types/api/dataset_storages/s3_dataset_storage.py">S3DatasetStorage</a></code>
+- <code title="post /api/dataset-storages/s3/validate/">client.dataset_storages_s3.<a href="./src/label_studio/resources/dataset_storages_s3.py">validate</a>(\*\*<a href="src/label_studio/types/dataset_storages_s3_validate_params.py">params</a>) -> <a href="./src/label_studio/types/api/dataset_storages/s3_dataset_storage.py">S3DatasetStorage</a></code>
+
+# DatasetStoragesTypes
+
+Methods:
+
+- <code title="get /api/dataset-storages/types/">client.dataset_storages_types.<a href="./src/label_studio/resources/dataset_storages_types.py">list</a>() -> None</code>

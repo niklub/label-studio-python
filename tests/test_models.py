@@ -7,9 +7,9 @@ import pytest
 import pydantic
 from pydantic import Field
 
-from petstore._utils import PropertyInfo
-from petstore._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
-from petstore._models import BaseModel, construct_type
+from label_studio._utils import PropertyInfo
+from label_studio._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
+from label_studio._models import BaseModel, construct_type
 
 
 class BasicModel(BaseModel):

@@ -4,8 +4,8 @@ from typing import Sequence
 
 import pytest
 
-from petstore._types import FileTypes
-from petstore._utils import extract_files
+from label_studio._types import FileTypes
+from label_studio._utils import extract_files
 
 
 def test_removes_files_from_input() -> None:
