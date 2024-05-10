@@ -8,8 +8,8 @@ from typing import Any, TypeVar, Iterator, cast
 from datetime import date, datetime
 from typing_extensions import Literal, get_args, get_origin, assert_type
 
-from petstore._types import NoneType
-from petstore._utils import (
+from label_studio._types import NoneType
+from label_studio._utils import (
     is_dict,
     is_list,
     is_list_type,
@@ -17,8 +17,8 @@ from petstore._utils import (
     extract_type_arg,
     is_annotated_type,
 )
-from petstore._compat import PYDANTIC_V2, field_outer_type, get_model_fields
-from petstore._models import BaseModel
+from label_studio._compat import PYDANTIC_V2, field_outer_type, get_model_fields
+from label_studio._models import BaseModel
 
 BaseModelT = TypeVar("BaseModelT", bound=BaseModel)
 

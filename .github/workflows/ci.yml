@@ -38,7 +38,7 @@ jobs:
 
       - name: Ensure importable
         run: |
-          rye run python -c 'import petstore'
+          rye run python -c 'import label_studio'
   test:
     name: test
     runs-on: ubuntu-latest

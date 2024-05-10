@@ -1,8 +1,8 @@
-# Petstore Python API library
+# Label Studio Python API library
 
 [![PyPI version](https://img.shields.io/pypi/v/label-studio.svg)](https://pypi.org/project/label-studio/)
 
-The Petstore Python library provides convenient access to the Petstore REST API from any Python 3.7+
+The Label Studio Python library provides convenient access to the Label Studio REST API from any Python 3.7+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
@@ -10,13 +10,13 @@ It is generated with [Stainless](https://www.stainlessapi.com/).
 
 ## Documentation
 
-The REST API documentation can be found [on app.stainlessapi.com](https://app.stainlessapi.com/docs). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found [on labelstud.io](https://labelstud.io). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
 ```sh
-# install from this staging repo
-pip install git+ssh://git@github.com/stainless-sdks/label-studio-python.git
+# install from the production repo
+pip install git+ssh://git@github.com/niklub/label-studio-python.git
 ```
 
 > [!NOTE]
@@ -28,48 +28,40 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
-from petstore import Petstore
+from label_studio import LabelStudio
 
-client = Petstore(
+client = LabelStudio(
     # This is the default and can be omitted
-    api_key=os.environ.get("PETSTORE_API_KEY"),
+    token=os.environ.get("LABEL_STUDIO_TOKEN"),
 )
 
-order = client.store.create_order(
-    pet_id=1,
-    quantity=1,
-    status="placed",
-)
-print(order.id)
+comment = client.comments.create()
+print(comment.id)
 ```
 
-While you can provide an `api_key` keyword argument,
+While you can provide a `token` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `PETSTORE_API_KEY="My API Key"` to your `.env` file
-so that your API Key is not stored in source control.
+to add `LABEL_STUDIO_TOKEN="My Token"` to your `.env` file
+so that your Token is not stored in source control.
 
 ## Async usage
 
-Simply import `AsyncPetstore` instead of `Petstore` and use `await` with each API call:
+Simply import `AsyncLabelStudio` instead of `LabelStudio` and use `await` with each API call:
 
 ```python
 import os
 import asyncio
-from petstore import AsyncPetstore
+from label_studio import AsyncLabelStudio
 
-client = AsyncPetstore(
+client = AsyncLabelStudio(
     # This is the default and can be omitted
-    api_key=os.environ.get("PETSTORE_API_KEY"),
+    token=os.environ.get("LABEL_STUDIO_TOKEN"),
 )
 
 
 async def main() -> None:
-    order = await client.store.create_order(
-        pet_id=1,
-        quantity=1,
-        status="placed",
-    )
-    print(order.id)
+    comment = await client.comments.create()
+    print(comment.id)
 
 
 asyncio.run(main())
@@ -88,27 +80,27 @@ Typed requests and responses provide autocomplete and documentation within your 
 
 ## Handling errors
 
-When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `petstore.APIConnectionError` is raised.
+When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `label_studio.APIConnectionError` is raised.
 
 When the API returns a non-success status code (that is, 4xx or 5xx
-response), a subclass of `petstore.APIStatusError` is raised, containing `status_code` and `response` properties.
+response), a subclass of `label_studio.APIStatusError` is raised, containing `status_code` and `response` properties.
 
-All errors inherit from `petstore.APIError`.
+All errors inherit from `label_studio.APIError`.
 
 ```python
-import petstore
-from petstore import Petstore
+import label_studio
+from label_studio import LabelStudio
 
-client = Petstore()
+client = LabelStudio()
 
 try:
-    client.store.inventory()
-except petstore.APIConnectionError as e:
+    client.comments.create()
+except label_studio.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
-except petstore.RateLimitError as e:
+except label_studio.RateLimitError as e:
     print("A 429 status code was received; we should back off a bit.")
-except petstore.APIStatusError as e:
+except label_studio.APIStatusError as e:
     print("Another non-200-range status code was received")
     print(e.status_code)
     print(e.response)
@@ -136,16 +128,16 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from petstore import Petstore
+from label_studio import LabelStudio
 
 # Configure the default for all requests:
-client = Petstore(
+client = LabelStudio(
     # default is 2
     max_retries=0,
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).store.inventory()
+client.with_options(max_retries=5).comments.create()
 ```
 
 ### Timeouts
@@ -154,21 +146,21 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
 
 ```python
-from petstore import Petstore
+from label_studio import LabelStudio
 
 # Configure the default for all requests:
-client = Petstore(
+client = LabelStudio(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
 )
 
 # More granular control:
-client = Petstore(
+client = LabelStudio(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).store.inventory()
+client.with_options(timeout=5.0).comments.create()
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -181,10 +173,10 @@ Note that requests that time out are [retried twice by default](#retries).
 
 We use the standard library [`logging`](https://docs.python.org/3/library/logging.html) module.
 
-You can enable logging by setting the environment variable `PETSTORE_LOG` to `debug`.
+You can enable logging by setting the environment variable `LABEL_STUDIO_LOG` to `debug`.
 
 ```shell
-$ export PETSTORE_LOG=debug
+$ export LABEL_STUDIO_LOG=debug
 ```
 
 ### How to tell whether `None` means `null` or missing
@@ -204,19 +196,19 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from petstore import Petstore
+from label_studio import LabelStudio
 
-client = Petstore()
-response = client.store.with_raw_response.inventory()
+client = LabelStudio()
+response = client.comments.with_raw_response.create()
 print(response.headers.get('X-My-Header'))
 
-store = response.parse()  # get the object that `store.inventory()` would have returned
-print(store)
+comment = response.parse()  # get the object that `comments.create()` would have returned
+print(comment.id)
 ```
 
-These methods return an [`APIResponse`](https://github.com/stainless-sdks/tree/main/src/petstore/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/niklub/label-studio-python/tree/main/src/label_studio/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/tree/main/src/petstore/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/niklub/label-studio-python/tree/main/src/label_studio/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -225,7 +217,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.store.with_streaming_response.inventory() as response:
+with client.comments.with_streaming_response.create() as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():
@@ -278,10 +270,10 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 - Additional [advanced](https://www.python-httpx.org/advanced/#client-instances) functionality
 
 ```python
-from petstore import Petstore, DefaultHttpxClient
+from label_studio import LabelStudio, DefaultHttpxClient
 
-client = Petstore(
-    # Or use the `PETSTORE_BASE_URL` env var
+client = LabelStudio(
+    # Or use the `LABEL_STUDIO_BASE_URL` env var
     base_url="http://my.test.server.example.com:8083",
     http_client=DefaultHttpxClient(
         proxies="http://my.test.proxy.example.com",
@@ -304,7 +296,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/label-studio-python/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/niklub/label-studio-python/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 

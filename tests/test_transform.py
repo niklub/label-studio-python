@@ -8,15 +8,15 @@ from typing_extensions import Required, Annotated, TypedDict
 
 import pytest
 
-from petstore._types import Base64FileInput
-from petstore._utils import (
+from label_studio._types import Base64FileInput
+from label_studio._utils import (
     PropertyInfo,
     transform as _transform,
     parse_datetime,
     async_transform as _async_transform,
 )
-from petstore._compat import PYDANTIC_V2
-from petstore._models import BaseModel
+from label_studio._compat import PYDANTIC_V2
+from label_studio._models import BaseModel
 
 _T = TypeVar("_T")
 
