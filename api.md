@@ -72,6 +72,22 @@ Methods:
 - <code title="get /api/current-user/token">client.current_user.<a href="./src/label_studio/resources/current_user.py">token</a>() -> None</code>
 - <code title="get /api/current-user/whoami">client.current_user.<a href="./src/label_studio/resources/current_user.py">whoami</a>() -> <a href="./src/label_studio/types/lse_user.py">LseUser</a></code>
 
+# Ml
+
+Types:
+
+```python
+from label_studio.types import MlCreateResponse, MlUpdateResponse, MlListResponse, MlGetResponse
+```
+
+Methods:
+
+- <code title="post /api/ml/">client.ml.<a href="./src/label_studio/resources/ml.py">create</a>(\*\*<a href="src/label_studio/types/ml_create_params.py">params</a>) -> <a href="./src/label_studio/types/ml_create_response.py">MlCreateResponse</a></code>
+- <code title="patch /api/ml/{id}">client.ml.<a href="./src/label_studio/resources/ml.py">update</a>(id, \*\*<a href="src/label_studio/types/ml_update_params.py">params</a>) -> <a href="./src/label_studio/types/ml_update_response.py">MlUpdateResponse</a></code>
+- <code title="get /api/ml/">client.ml.<a href="./src/label_studio/resources/ml.py">list</a>(\*\*<a href="src/label_studio/types/ml_list_params.py">params</a>) -> <a href="./src/label_studio/types/ml_list_response.py">MlListResponse</a></code>
+- <code title="delete /api/ml/{id}">client.ml.<a href="./src/label_studio/resources/ml.py">delete</a>(id) -> None</code>
+- <code title="get /api/ml/{id}">client.ml.<a href="./src/label_studio/resources/ml.py">get</a>(id) -> <a href="./src/label_studio/types/ml_get_response.py">MlGetResponse</a></code>
+
 # API
 
 ## Dashboards
