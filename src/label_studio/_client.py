@@ -52,6 +52,8 @@ class LabelStudio(SyncAPIClient):
     comments: resources.CommentsResource
     current_user: resources.CurrentUserResource
     ml: resources.MlResource
+    projects: resources.ProjectsResource
+    tasks: resources.TasksResource
     api: resources.APIResource
     dataset_storages: resources.DatasetStoragesResource
     with_raw_response: LabelStudioWithRawResponse
@@ -117,6 +119,8 @@ class LabelStudio(SyncAPIClient):
         self.comments = resources.CommentsResource(self)
         self.current_user = resources.CurrentUserResource(self)
         self.ml = resources.MlResource(self)
+        self.projects = resources.ProjectsResource(self)
+        self.tasks = resources.TasksResource(self)
         self.api = resources.APIResource(self)
         self.dataset_storages = resources.DatasetStoragesResource(self)
         self.with_raw_response = LabelStudioWithRawResponse(self)
@@ -234,6 +238,8 @@ class AsyncLabelStudio(AsyncAPIClient):
     comments: resources.AsyncCommentsResource
     current_user: resources.AsyncCurrentUserResource
     ml: resources.AsyncMlResource
+    projects: resources.AsyncProjectsResource
+    tasks: resources.AsyncTasksResource
     api: resources.AsyncAPIResource
     dataset_storages: resources.AsyncDatasetStoragesResource
     with_raw_response: AsyncLabelStudioWithRawResponse
@@ -299,6 +305,8 @@ class AsyncLabelStudio(AsyncAPIClient):
         self.comments = resources.AsyncCommentsResource(self)
         self.current_user = resources.AsyncCurrentUserResource(self)
         self.ml = resources.AsyncMlResource(self)
+        self.projects = resources.AsyncProjectsResource(self)
+        self.tasks = resources.AsyncTasksResource(self)
         self.api = resources.AsyncAPIResource(self)
         self.dataset_storages = resources.AsyncDatasetStoragesResource(self)
         self.with_raw_response = AsyncLabelStudioWithRawResponse(self)
@@ -417,6 +425,8 @@ class LabelStudioWithRawResponse:
         self.comments = resources.CommentsResourceWithRawResponse(client.comments)
         self.current_user = resources.CurrentUserResourceWithRawResponse(client.current_user)
         self.ml = resources.MlResourceWithRawResponse(client.ml)
+        self.projects = resources.ProjectsResourceWithRawResponse(client.projects)
+        self.tasks = resources.TasksResourceWithRawResponse(client.tasks)
         self.api = resources.APIResourceWithRawResponse(client.api)
         self.dataset_storages = resources.DatasetStoragesResourceWithRawResponse(client.dataset_storages)
 
@@ -429,6 +439,8 @@ class AsyncLabelStudioWithRawResponse:
         self.comments = resources.AsyncCommentsResourceWithRawResponse(client.comments)
         self.current_user = resources.AsyncCurrentUserResourceWithRawResponse(client.current_user)
         self.ml = resources.AsyncMlResourceWithRawResponse(client.ml)
+        self.projects = resources.AsyncProjectsResourceWithRawResponse(client.projects)
+        self.tasks = resources.AsyncTasksResourceWithRawResponse(client.tasks)
         self.api = resources.AsyncAPIResourceWithRawResponse(client.api)
         self.dataset_storages = resources.AsyncDatasetStoragesResourceWithRawResponse(client.dataset_storages)
 
@@ -441,6 +453,8 @@ class LabelStudioWithStreamedResponse:
         self.comments = resources.CommentsResourceWithStreamingResponse(client.comments)
         self.current_user = resources.CurrentUserResourceWithStreamingResponse(client.current_user)
         self.ml = resources.MlResourceWithStreamingResponse(client.ml)
+        self.projects = resources.ProjectsResourceWithStreamingResponse(client.projects)
+        self.tasks = resources.TasksResourceWithStreamingResponse(client.tasks)
         self.api = resources.APIResourceWithStreamingResponse(client.api)
         self.dataset_storages = resources.DatasetStoragesResourceWithStreamingResponse(client.dataset_storages)
 
@@ -457,6 +471,8 @@ class AsyncLabelStudioWithStreamedResponse:
         self.comments = resources.AsyncCommentsResourceWithStreamingResponse(client.comments)
         self.current_user = resources.AsyncCurrentUserResourceWithStreamingResponse(client.current_user)
         self.ml = resources.AsyncMlResourceWithStreamingResponse(client.ml)
+        self.projects = resources.AsyncProjectsResourceWithStreamingResponse(client.projects)
+        self.tasks = resources.AsyncTasksResourceWithStreamingResponse(client.tasks)
         self.api = resources.AsyncAPIResourceWithStreamingResponse(client.api)
         self.dataset_storages = resources.AsyncDatasetStoragesResourceWithStreamingResponse(client.dataset_storages)
 
