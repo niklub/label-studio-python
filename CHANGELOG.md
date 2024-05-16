@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.2 (2024-05-16)
+
+Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/niklub/label-studio-python/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
+
+### Features
+
+* **api:** update via SDK Studio ([#9](https://github.com/niklub/label-studio-python/issues/9)) ([ec09634](https://github.com/niklub/label-studio-python/commit/ec09634cea576283eb114ce5f2e2923a4e1c87da))
+
 ## 0.1.0-alpha.1 (2024-05-16)
 
 Full Changelog: [v0.0.1-alpha.1...v0.1.0-alpha.1](https://github.com/niklub/label-studio-python/compare/v0.0.1-alpha.1...v0.1.0-alpha.1)
