@@ -88,6 +88,48 @@ Methods:
 - <code title="delete /api/ml/{id}">client.ml.<a href="./src/label_studio/resources/ml.py">delete</a>(id) -> None</code>
 - <code title="get /api/ml/{id}">client.ml.<a href="./src/label_studio/resources/ml.py">get</a>(id) -> <a href="./src/label_studio/types/ml_get_response.py">MlGetResponse</a></code>
 
+# Projects
+
+Types:
+
+```python
+from label_studio.types import (
+    ProjectCreateResponse,
+    ProjectUpdateResponse,
+    ProjectListResponse,
+    ProjectGetResponse,
+)
+```
+
+Methods:
+
+- <code title="post /api/projects/">client.projects.<a href="./src/label_studio/resources/projects.py">create</a>(\*\*<a href="src/label_studio/types/project_create_params.py">params</a>) -> <a href="./src/label_studio/types/project_create_response.py">ProjectCreateResponse</a></code>
+- <code title="patch /api/projects/{id}/">client.projects.<a href="./src/label_studio/resources/projects.py">update</a>(id, \*\*<a href="src/label_studio/types/project_update_params.py">params</a>) -> <a href="./src/label_studio/types/project_update_response.py">ProjectUpdateResponse</a></code>
+- <code title="get /api/projects/">client.projects.<a href="./src/label_studio/resources/projects.py">list</a>(\*\*<a href="src/label_studio/types/project_list_params.py">params</a>) -> <a href="./src/label_studio/types/project_list_response.py">ProjectListResponse</a></code>
+- <code title="delete /api/projects/{id}/">client.projects.<a href="./src/label_studio/resources/projects.py">delete</a>(id) -> None</code>
+- <code title="get /api/projects/{id}/">client.projects.<a href="./src/label_studio/resources/projects.py">get</a>(id) -> <a href="./src/label_studio/types/project_get_response.py">ProjectGetResponse</a></code>
+
+# Tasks
+
+Types:
+
+```python
+from label_studio.types import (
+    TaskCreateResponse,
+    TaskUpdateResponse,
+    TaskListResponse,
+    TaskGetResponse,
+)
+```
+
+Methods:
+
+- <code title="post /api/tasks/">client.tasks.<a href="./src/label_studio/resources/tasks.py">create</a>(\*\*<a href="src/label_studio/types/task_create_params.py">params</a>) -> <a href="./src/label_studio/types/task_create_response.py">TaskCreateResponse</a></code>
+- <code title="patch /api/tasks/{id}/">client.tasks.<a href="./src/label_studio/resources/tasks.py">update</a>(id, \*\*<a href="src/label_studio/types/task_update_params.py">params</a>) -> <a href="./src/label_studio/types/task_update_response.py">TaskUpdateResponse</a></code>
+- <code title="get /api/tasks/">client.tasks.<a href="./src/label_studio/resources/tasks.py">list</a>(\*\*<a href="src/label_studio/types/task_list_params.py">params</a>) -> <a href="./src/label_studio/types/task_list_response.py">TaskListResponse</a></code>
+- <code title="delete /api/tasks/{id}/">client.tasks.<a href="./src/label_studio/resources/tasks.py">delete</a>(id) -> None</code>
+- <code title="get /api/tasks/{id}/">client.tasks.<a href="./src/label_studio/resources/tasks.py">get</a>(id) -> <a href="./src/label_studio/types/task_get_response.py">TaskGetResponse</a></code>
+
 # API
 
 ## Dashboards
