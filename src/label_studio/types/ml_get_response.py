@@ -58,9 +58,6 @@ class MlGetResponse(BaseModel):
 
     state: Optional[Literal["CO", "DI", "ER", "TR", "PR"]] = None
 
-    timeout: Optional[float] = None
-    """Response model timeout"""
-
     title: Optional[str] = None
     """Name of the machine learning backend"""
 
