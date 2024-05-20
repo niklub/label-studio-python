@@ -5,10 +5,10 @@ from datetime import datetime
 
 from .._models import BaseModel
 
-__all__ = ["TaskListResponse", "Result"]
+__all__ = ["TaskListResponse"]
 
 
-class Result(BaseModel):
+class TaskListResponse(BaseModel):
     data: object
     """User imported or uploaded data for a task.
 
@@ -74,13 +74,3 @@ class Result(BaseModel):
 
     updated_by: Optional[int] = None
     """Last annotator or reviewer who updated this task"""
-
-
-class TaskListResponse(BaseModel):
-    count: int
-
-    results: List[Result]
-
-    next: Optional[str] = None
-
-    previous: Optional[str] = None

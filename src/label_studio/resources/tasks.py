@@ -21,7 +21,9 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from ..pagination import SyncLsOffsetPage, AsyncLsOffsetPage
 from .._base_client import (
+    AsyncPaginator,
     make_request_options,
 )
 from ..types.task_get_response import TaskGetResponse
@@ -258,7 +260,7 @@ class TasksResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> TaskListResponse:
+    ) -> SyncLsOffsetPage[TaskListResponse]:
         """
         Retrieve a list of tasks with pagination for a specific view or project, by
         using filters and ordering.
@@ -282,8 +284,9 @@ class TasksResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._get(
+        return self._get_api_list(
             "/api/tasks/",
+            page=SyncLsOffsetPage[TaskListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -300,7 +303,7 @@ class TasksResource(SyncAPIResource):
                     task_list_params.TaskListParams,
                 ),
             ),
-            cast_to=TaskListResponse,
+            model=TaskListResponse,
         )
 
     def delete(
@@ -585,7 +588,7 @@ class AsyncTasksResource(AsyncAPIResource):
             cast_to=TaskUpdateResponse,
         )
 
-    async def list(
+    def list(
         self,
         *,
         page: int | NotGiven = NOT_GIVEN,
@@ -599,7 +602,7 @@ class AsyncTasksResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> TaskListResponse:
+    ) -> AsyncPaginator[TaskListResponse, AsyncLsOffsetPage[TaskListResponse]]:
         """
         Retrieve a list of tasks with pagination for a specific view or project, by
         using filters and ordering.
@@ -623,14 +626,15 @@ class AsyncTasksResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._get(
+        return self._get_api_list(
             "/api/tasks/",
+            page=AsyncLsOffsetPage[TaskListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
+                query=maybe_transform(
                     {
                         "page": page,
                         "page_size": page_size,
@@ -641,7 +645,7 @@ class AsyncTasksResource(AsyncAPIResource):
                     task_list_params.TaskListParams,
                 ),
             ),
-            cast_to=TaskListResponse,
+            model=TaskListResponse,
         )
 
     async def delete(

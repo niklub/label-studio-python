@@ -3,8 +3,6 @@
 from typing import List, Generic, TypeVar, Optional, cast
 from typing_extensions import override
 
-from pydantic import Field as FieldInfo
-
 from ._base_client import BasePage, PageInfo, BaseSyncPage, BaseAsyncPage
 
 __all__ = ["SyncLsOffsetPage", "AsyncLsOffsetPage"]
@@ -14,7 +12,7 @@ _T = TypeVar("_T")
 
 class SyncLsOffsetPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
     results: List[_T]
-    ount: Optional[int] = FieldInfo(alias="сount", default=None)
+    count: Optional[int] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
@@ -32,7 +30,7 @@ class SyncLsOffsetPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
 class AsyncLsOffsetPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
     results: List[_T]
-    ount: Optional[int] = FieldInfo(alias="сount", default=None)
+    count: Optional[int] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
