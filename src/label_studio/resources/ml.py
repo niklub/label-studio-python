@@ -106,7 +106,6 @@ class MlResource(SyncAPIResource):
         is_interactive: bool | NotGiven = NOT_GIVEN,
         model_version: Optional[str] | NotGiven = NOT_GIVEN,
         state: Literal["CO", "DI", "ER", "TR", "PR"] | NotGiven = NOT_GIVEN,
-        api_timeout: float | NotGiven = NOT_GIVEN,
         title: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -143,8 +142,6 @@ class MlResource(SyncAPIResource):
 
           model_version: Current model version associated with this machine learning backend
 
-          api_timeout: Response model timeout
-
           title: Name of the machine learning backend
 
           extra_headers: Send extra headers
@@ -171,7 +168,6 @@ class MlResource(SyncAPIResource):
                     "is_interactive": is_interactive,
                     "model_version": model_version,
                     "state": state,
-                    "timeout": api_timeout,
                     "title": title,
                 },
                 ml_update_params.MlUpdateParams,
@@ -375,7 +371,6 @@ class AsyncMlResource(AsyncAPIResource):
         is_interactive: bool | NotGiven = NOT_GIVEN,
         model_version: Optional[str] | NotGiven = NOT_GIVEN,
         state: Literal["CO", "DI", "ER", "TR", "PR"] | NotGiven = NOT_GIVEN,
-        api_timeout: float | NotGiven = NOT_GIVEN,
         title: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -412,8 +407,6 @@ class AsyncMlResource(AsyncAPIResource):
 
           model_version: Current model version associated with this machine learning backend
 
-          api_timeout: Response model timeout
-
           title: Name of the machine learning backend
 
           extra_headers: Send extra headers
@@ -440,7 +433,6 @@ class AsyncMlResource(AsyncAPIResource):
                     "is_interactive": is_interactive,
                     "model_version": model_version,
                     "state": state,
-                    "timeout": api_timeout,
                     "title": title,
                 },
                 ml_update_params.MlUpdateParams,

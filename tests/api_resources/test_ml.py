@@ -80,7 +80,6 @@ class TestMl:
             is_interactive=True,
             model_version="string",
             state="CO",
-            api_timeout=0,
             title="string",
         )
         assert_matches_type(MlUpdateResponse, ml, path=["response"])
@@ -269,7 +268,6 @@ class TestAsyncMl:
             is_interactive=True,
             model_version="string",
             state="CO",
-            api_timeout=0,
             title="string",
         )
         assert_matches_type(MlUpdateResponse, ml, path=["response"])

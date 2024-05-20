@@ -3,9 +3,7 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Literal, Required, Annotated, TypedDict
-
-from .._utils import PropertyInfo
+from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["MlUpdateParams"]
 
@@ -48,9 +46,6 @@ class MlUpdateParams(TypedDict, total=False):
     """Current model version associated with this machine learning backend"""
 
     state: Literal["CO", "DI", "ER", "TR", "PR"]
-
-    api_timeout: Annotated[float, PropertyInfo(alias="timeout")]
-    """Response model timeout"""
 
     title: Optional[str]
     """Name of the machine learning backend"""
