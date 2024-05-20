@@ -8,17 +8,10 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = [
-    "ProjectListResponse",
-    "Result",
-    "ResultAssignmentSettings",
-    "ResultMember",
-    "ResultReviewSettings",
-    "ResultCreatedBy",
-]
+__all__ = ["ProjectListResponse", "AssignmentSettings", "Member", "ReviewSettings", "CreatedBy"]
 
 
-class ResultAssignmentSettings(BaseModel):
+class AssignmentSettings(BaseModel):
     id: Optional[int] = None
 
     label_stream_task_distribution: Optional[Literal["auto_distribution", "assigned_only"]] = None
@@ -27,11 +20,11 @@ class ResultAssignmentSettings(BaseModel):
     project: Optional[int] = None
 
 
-class ResultMember(BaseModel):
+class Member(BaseModel):
     user: Optional[str] = None
 
 
-class ResultReviewSettings(BaseModel):
+class ReviewSettings(BaseModel):
     id: Optional[int] = None
 
     anonymize_annotations: Optional[bool] = None
@@ -67,7 +60,7 @@ class ResultReviewSettings(BaseModel):
     """Show instructions to the reviewers before they start"""
 
 
-class ResultCreatedBy(BaseModel):
+class CreatedBy(BaseModel):
     id: Optional[int] = None
 
     avatar: Optional[str] = None
@@ -79,12 +72,12 @@ class ResultCreatedBy(BaseModel):
     last_name: Optional[str] = None
 
 
-class Result(BaseModel):
-    assignment_settings: ResultAssignmentSettings
+class ProjectListResponse(BaseModel):
+    assignment_settings: AssignmentSettings
 
-    members: List[ResultMember]
+    members: List[Member]
 
-    review_settings: ResultReviewSettings
+    review_settings: ReviewSettings
 
     id: Optional[int] = None
 
@@ -108,7 +101,7 @@ class Result(BaseModel):
 
     created_at: Optional[datetime] = None
 
-    created_by: Optional[ResultCreatedBy] = None
+    created_by: Optional[CreatedBy] = None
     """User who created Dataset"""
 
     data_types: Optional[object] = None
@@ -226,13 +219,3 @@ class Result(BaseModel):
     useful_annotation_number: Optional[str] = None
 
     workspace: Optional[str] = None
-
-
-class ProjectListResponse(BaseModel):
-    count: int
-
-    results: List[Result]
-
-    next: Optional[str] = None
-
-    previous: Optional[str] = None
