@@ -22,7 +22,9 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from ..pagination import SyncLsOffsetPage, AsyncLsOffsetPage
 from .._base_client import (
+    AsyncPaginator,
     make_request_options,
 )
 from ..types.project_get_response import ProjectGetResponse
@@ -347,7 +349,7 @@ class ProjectsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProjectListResponse:
+    ) -> SyncLsOffsetPage[ProjectListResponse]:
         """
         Return a list of the projects that you've created.
 
@@ -382,8 +384,9 @@ class ProjectsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._get(
+        return self._get_api_list(
             "/api/projects/",
+            page=SyncLsOffsetPage[ProjectListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -401,7 +404,7 @@ class ProjectsResource(SyncAPIResource):
                     project_list_params.ProjectListParams,
                 ),
             ),
-            cast_to=ProjectListResponse,
+            model=ProjectListResponse,
         )
 
     def delete(
@@ -767,7 +770,7 @@ class AsyncProjectsResource(AsyncAPIResource):
             cast_to=ProjectUpdateResponse,
         )
 
-    async def list(
+    def list(
         self,
         *,
         ids: str | NotGiven = NOT_GIVEN,
@@ -782,7 +785,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProjectListResponse:
+    ) -> AsyncPaginator[ProjectListResponse, AsyncLsOffsetPage[ProjectListResponse]]:
         """
         Return a list of the projects that you've created.
 
@@ -817,14 +820,15 @@ class AsyncProjectsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._get(
+        return self._get_api_list(
             "/api/projects/",
+            page=AsyncLsOffsetPage[ProjectListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
+                query=maybe_transform(
                     {
                         "ids": ids,
                         "ordering": ordering,
@@ -836,7 +840,7 @@ class AsyncProjectsResource(AsyncAPIResource):
                     project_list_params.ProjectListParams,
                 ),
             ),
-            cast_to=ProjectListResponse,
+            model=ProjectListResponse,
         )
 
     async def delete(
