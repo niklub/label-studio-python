@@ -18,9 +18,7 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import (
-    make_request_options,
-)
+from .._base_client import make_request_options
 from ..types.annotation_history_list_response import AnnotationHistoryListResponse
 
 __all__ = ["AnnotationHistoryResource", "AsyncAnnotationHistoryResource"]
@@ -29,10 +27,21 @@ __all__ = ["AnnotationHistoryResource", "AsyncAnnotationHistoryResource"]
 class AnnotationHistoryResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AnnotationHistoryResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#accessing-raw-response-data-eg-headers
+        """
         return AnnotationHistoryResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AnnotationHistoryResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#with_streaming_response
+        """
         return AnnotationHistoryResourceWithStreamingResponse(self)
 
     def list(
@@ -133,10 +142,21 @@ class AnnotationHistoryResource(SyncAPIResource):
 class AsyncAnnotationHistoryResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncAnnotationHistoryResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncAnnotationHistoryResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncAnnotationHistoryResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#with_streaming_response
+        """
         return AsyncAnnotationHistoryResourceWithStreamingResponse(self)
 
     async def list(

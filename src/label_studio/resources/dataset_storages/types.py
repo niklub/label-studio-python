@@ -13,9 +13,7 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._base_client import (
-    make_request_options,
-)
+from ..._base_client import make_request_options
 
 __all__ = ["TypesResource", "AsyncTypesResource"]
 
@@ -23,10 +21,21 @@ __all__ = ["TypesResource", "AsyncTypesResource"]
 class TypesResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> TypesResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#accessing-raw-response-data-eg-headers
+        """
         return TypesResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> TypesResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#with_streaming_response
+        """
         return TypesResourceWithStreamingResponse(self)
 
     def list(
@@ -53,10 +62,21 @@ class TypesResource(SyncAPIResource):
 class AsyncTypesResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncTypesResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncTypesResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncTypesResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#with_streaming_response
+        """
         return AsyncTypesResourceWithStreamingResponse(self)
 
     async def list(

@@ -28,7 +28,7 @@ class TestAnnotationHistory:
     def test_method_list_with_all_params(self, client: LabelStudio) -> None:
         annotation_history = client.annotation_history.list(
             annotation=0,
-            ordering="string",
+            ordering="ordering",
         )
         assert_matches_type(AnnotationHistoryListResponse, annotation_history, path=["response"])
 
@@ -99,7 +99,7 @@ class TestAsyncAnnotationHistory:
     async def test_method_list_with_all_params(self, async_client: AsyncLabelStudio) -> None:
         annotation_history = await async_client.annotation_history.list(
             annotation=0,
-            ordering="string",
+            ordering="ordering",
         )
         assert_matches_type(AnnotationHistoryListResponse, annotation_history, path=["response"])
 

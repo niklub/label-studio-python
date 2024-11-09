@@ -27,9 +27,7 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ....types.api import dataset_storage_list_params
-from ...._base_client import (
-    make_request_options,
-)
+from ...._base_client import make_request_options
 
 __all__ = ["DatasetStoragesResource", "AsyncDatasetStoragesResource"]
 
@@ -41,10 +39,21 @@ class DatasetStoragesResource(SyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> DatasetStoragesResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#accessing-raw-response-data-eg-headers
+        """
         return DatasetStoragesResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> DatasetStoragesResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#with_streaming_response
+        """
         return DatasetStoragesResourceWithStreamingResponse(self)
 
     def list(
@@ -93,10 +102,21 @@ class AsyncDatasetStoragesResource(AsyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> AsyncDatasetStoragesResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncDatasetStoragesResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncDatasetStoragesResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#with_streaming_response
+        """
         return AsyncDatasetStoragesResourceWithStreamingResponse(self)
 
     async def list(
