@@ -21,9 +21,7 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import (
-    make_request_options,
-)
+from .._base_client import make_request_options
 from ..types.ml_get_response import MlGetResponse
 from ..types.ml_list_response import MlListResponse
 from ..types.ml_create_response import MlCreateResponse
@@ -35,10 +33,21 @@ __all__ = ["MlResource", "AsyncMlResource"]
 class MlResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> MlResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#accessing-raw-response-data-eg-headers
+        """
         return MlResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> MlResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#with_streaming_response
+        """
         return MlResourceWithStreamingResponse(self)
 
     def create(
@@ -300,10 +309,21 @@ class MlResource(SyncAPIResource):
 class AsyncMlResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncMlResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncMlResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncMlResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#with_streaming_response
+        """
         return AsyncMlResourceWithStreamingResponse(self)
 
     async def create(

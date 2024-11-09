@@ -96,7 +96,7 @@ class TestAnnotationReviews:
     @parametrize
     def test_method_update(self, client: LabelStudio) -> None:
         annotation_review = client.annotation_reviews.update(
-            0,
+            id=0,
             annotation=0,
         )
         assert_matches_type(AnnotationReview, annotation_review, path=["response"])
@@ -104,7 +104,7 @@ class TestAnnotationReviews:
     @parametrize
     def test_method_update_with_all_params(self, client: LabelStudio) -> None:
         annotation_review = client.annotation_reviews.update(
-            0,
+            id=0,
             annotation=0,
             accepted=True,
             comment="x",
@@ -116,7 +116,7 @@ class TestAnnotationReviews:
     @parametrize
     def test_raw_response_update(self, client: LabelStudio) -> None:
         response = client.annotation_reviews.with_raw_response.update(
-            0,
+            id=0,
             annotation=0,
         )
 
@@ -128,7 +128,7 @@ class TestAnnotationReviews:
     @parametrize
     def test_streaming_response_update(self, client: LabelStudio) -> None:
         with client.annotation_reviews.with_streaming_response.update(
-            0,
+            id=0,
             annotation=0,
         ) as response:
             assert not response.is_closed
@@ -147,9 +147,9 @@ class TestAnnotationReviews:
     @parametrize
     def test_method_list_with_all_params(self, client: LabelStudio) -> None:
         annotation_review = client.annotation_reviews.list(
-            annotation="string",
-            annotation_task_project="string",
-            ordering="string",
+            annotation="annotation",
+            annotation_task_project="annotation__task__project",
+            ordering="ordering",
         )
         assert_matches_type(AnnotationReviewListResponse, annotation_review, path=["response"])
 
@@ -207,7 +207,7 @@ class TestAnnotationReviews:
     @parametrize
     def test_method_put(self, client: LabelStudio) -> None:
         annotation_review = client.annotation_reviews.put(
-            0,
+            id=0,
             annotation=0,
         )
         assert_matches_type(AnnotationReview, annotation_review, path=["response"])
@@ -215,7 +215,7 @@ class TestAnnotationReviews:
     @parametrize
     def test_method_put_with_all_params(self, client: LabelStudio) -> None:
         annotation_review = client.annotation_reviews.put(
-            0,
+            id=0,
             annotation=0,
             accepted=True,
             comment="x",
@@ -227,7 +227,7 @@ class TestAnnotationReviews:
     @parametrize
     def test_raw_response_put(self, client: LabelStudio) -> None:
         response = client.annotation_reviews.with_raw_response.put(
-            0,
+            id=0,
             annotation=0,
         )
 
@@ -239,7 +239,7 @@ class TestAnnotationReviews:
     @parametrize
     def test_streaming_response_put(self, client: LabelStudio) -> None:
         with client.annotation_reviews.with_streaming_response.put(
-            0,
+            id=0,
             annotation=0,
         ) as response:
             assert not response.is_closed
@@ -330,7 +330,7 @@ class TestAsyncAnnotationReviews:
     @parametrize
     async def test_method_update(self, async_client: AsyncLabelStudio) -> None:
         annotation_review = await async_client.annotation_reviews.update(
-            0,
+            id=0,
             annotation=0,
         )
         assert_matches_type(AnnotationReview, annotation_review, path=["response"])
@@ -338,7 +338,7 @@ class TestAsyncAnnotationReviews:
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncLabelStudio) -> None:
         annotation_review = await async_client.annotation_reviews.update(
-            0,
+            id=0,
             annotation=0,
             accepted=True,
             comment="x",
@@ -350,7 +350,7 @@ class TestAsyncAnnotationReviews:
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncLabelStudio) -> None:
         response = await async_client.annotation_reviews.with_raw_response.update(
-            0,
+            id=0,
             annotation=0,
         )
 
@@ -362,7 +362,7 @@ class TestAsyncAnnotationReviews:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncLabelStudio) -> None:
         async with async_client.annotation_reviews.with_streaming_response.update(
-            0,
+            id=0,
             annotation=0,
         ) as response:
             assert not response.is_closed
@@ -381,9 +381,9 @@ class TestAsyncAnnotationReviews:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncLabelStudio) -> None:
         annotation_review = await async_client.annotation_reviews.list(
-            annotation="string",
-            annotation_task_project="string",
-            ordering="string",
+            annotation="annotation",
+            annotation_task_project="annotation__task__project",
+            ordering="ordering",
         )
         assert_matches_type(AnnotationReviewListResponse, annotation_review, path=["response"])
 
@@ -441,7 +441,7 @@ class TestAsyncAnnotationReviews:
     @parametrize
     async def test_method_put(self, async_client: AsyncLabelStudio) -> None:
         annotation_review = await async_client.annotation_reviews.put(
-            0,
+            id=0,
             annotation=0,
         )
         assert_matches_type(AnnotationReview, annotation_review, path=["response"])
@@ -449,7 +449,7 @@ class TestAsyncAnnotationReviews:
     @parametrize
     async def test_method_put_with_all_params(self, async_client: AsyncLabelStudio) -> None:
         annotation_review = await async_client.annotation_reviews.put(
-            0,
+            id=0,
             annotation=0,
             accepted=True,
             comment="x",
@@ -461,7 +461,7 @@ class TestAsyncAnnotationReviews:
     @parametrize
     async def test_raw_response_put(self, async_client: AsyncLabelStudio) -> None:
         response = await async_client.annotation_reviews.with_raw_response.put(
-            0,
+            id=0,
             annotation=0,
         )
 
@@ -473,7 +473,7 @@ class TestAsyncAnnotationReviews:
     @parametrize
     async def test_streaming_response_put(self, async_client: AsyncLabelStudio) -> None:
         async with async_client.annotation_reviews.with_streaming_response.put(
-            0,
+            id=0,
             annotation=0,
         ) as response:
             assert not response.is_closed

@@ -2,7 +2,7 @@
 
 from typing import List, Optional
 from datetime import datetime
-from typing_extensions import Literal
+from typing_extensions import Literal, TypeAlias
 
 from pydantic import Field as FieldInfo
 
@@ -64,4 +64,4 @@ class MlListResponseItem(BaseModel):
     updated_at: Optional[datetime] = None
 
 
-MlListResponse = List[MlListResponseItem]
+MlListResponse: TypeAlias = List[MlListResponseItem]

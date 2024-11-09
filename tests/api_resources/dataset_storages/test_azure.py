@@ -21,7 +21,7 @@ class TestAzure:
     @parametrize
     def test_method_sync(self, client: LabelStudio) -> None:
         azure = client.dataset_storages.azure.sync(
-            "string",
+            id="id",
             dataset=0,
         )
         assert_matches_type(AzureDatasetStorage, azure, path=["response"])
@@ -29,26 +29,26 @@ class TestAzure:
     @parametrize
     def test_method_sync_with_all_params(self, client: LabelStudio) -> None:
         azure = client.dataset_storages.azure.sync(
-            "string",
+            id="id",
             dataset=0,
-            account_key="string",
-            account_name="string",
-            container="string",
-            description="string",
-            glob_pattern="string",
+            account_key="account_key",
+            account_name="account_name",
+            container="container",
+            description="description",
+            glob_pattern="glob_pattern",
             last_sync=parse_datetime("2019-12-27T18:11:19.117Z"),
             last_sync_count=0,
-            last_sync_job="string",
+            last_sync_job="last_sync_job",
             meta={},
-            prefix="string",
+            prefix="prefix",
             presign=True,
             presign_ttl=0,
-            regex_filter="string",
+            regex_filter="regex_filter",
             status="initialized",
             synced=True,
             synchronizable=True,
-            title="string",
-            traceback="string",
+            title="title",
+            traceback="traceback",
             use_blob_urls=True,
         )
         assert_matches_type(AzureDatasetStorage, azure, path=["response"])
@@ -56,7 +56,7 @@ class TestAzure:
     @parametrize
     def test_raw_response_sync(self, client: LabelStudio) -> None:
         response = client.dataset_storages.azure.with_raw_response.sync(
-            "string",
+            id="id",
             dataset=0,
         )
 
@@ -68,7 +68,7 @@ class TestAzure:
     @parametrize
     def test_streaming_response_sync(self, client: LabelStudio) -> None:
         with client.dataset_storages.azure.with_streaming_response.sync(
-            "string",
+            id="id",
             dataset=0,
         ) as response:
             assert not response.is_closed
@@ -83,7 +83,7 @@ class TestAzure:
     def test_path_params_sync(self, client: LabelStudio) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.dataset_storages.azure.with_raw_response.sync(
-                "",
+                id="",
                 dataset=0,
             )
 
@@ -94,7 +94,7 @@ class TestAsyncAzure:
     @parametrize
     async def test_method_sync(self, async_client: AsyncLabelStudio) -> None:
         azure = await async_client.dataset_storages.azure.sync(
-            "string",
+            id="id",
             dataset=0,
         )
         assert_matches_type(AzureDatasetStorage, azure, path=["response"])
@@ -102,26 +102,26 @@ class TestAsyncAzure:
     @parametrize
     async def test_method_sync_with_all_params(self, async_client: AsyncLabelStudio) -> None:
         azure = await async_client.dataset_storages.azure.sync(
-            "string",
+            id="id",
             dataset=0,
-            account_key="string",
-            account_name="string",
-            container="string",
-            description="string",
-            glob_pattern="string",
+            account_key="account_key",
+            account_name="account_name",
+            container="container",
+            description="description",
+            glob_pattern="glob_pattern",
             last_sync=parse_datetime("2019-12-27T18:11:19.117Z"),
             last_sync_count=0,
-            last_sync_job="string",
+            last_sync_job="last_sync_job",
             meta={},
-            prefix="string",
+            prefix="prefix",
             presign=True,
             presign_ttl=0,
-            regex_filter="string",
+            regex_filter="regex_filter",
             status="initialized",
             synced=True,
             synchronizable=True,
-            title="string",
-            traceback="string",
+            title="title",
+            traceback="traceback",
             use_blob_urls=True,
         )
         assert_matches_type(AzureDatasetStorage, azure, path=["response"])
@@ -129,7 +129,7 @@ class TestAsyncAzure:
     @parametrize
     async def test_raw_response_sync(self, async_client: AsyncLabelStudio) -> None:
         response = await async_client.dataset_storages.azure.with_raw_response.sync(
-            "string",
+            id="id",
             dataset=0,
         )
 
@@ -141,7 +141,7 @@ class TestAsyncAzure:
     @parametrize
     async def test_streaming_response_sync(self, async_client: AsyncLabelStudio) -> None:
         async with async_client.dataset_storages.azure.with_streaming_response.sync(
-            "string",
+            id="id",
             dataset=0,
         ) as response:
             assert not response.is_closed
@@ -156,6 +156,6 @@ class TestAsyncAzure:
     async def test_path_params_sync(self, async_client: AsyncLabelStudio) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.dataset_storages.azure.with_raw_response.sync(
-                "",
+                id="",
                 dataset=0,
             )
