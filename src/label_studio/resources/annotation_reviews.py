@@ -25,9 +25,7 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import (
-    make_request_options,
-)
+from .._base_client import make_request_options
 from ..types.annotation_review import AnnotationReview
 from ..types.annotation_review_list_response import AnnotationReviewListResponse
 
@@ -37,10 +35,21 @@ __all__ = ["AnnotationReviewsResource", "AsyncAnnotationReviewsResource"]
 class AnnotationReviewsResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AnnotationReviewsResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#accessing-raw-response-data-eg-headers
+        """
         return AnnotationReviewsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AnnotationReviewsResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#with_streaming_response
+        """
         return AnnotationReviewsResourceWithStreamingResponse(self)
 
     def create(
@@ -309,10 +318,21 @@ class AnnotationReviewsResource(SyncAPIResource):
 class AsyncAnnotationReviewsResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncAnnotationReviewsResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncAnnotationReviewsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncAnnotationReviewsResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#with_streaming_response
+        """
         return AsyncAnnotationReviewsResourceWithStreamingResponse(self)
 
     async def create(

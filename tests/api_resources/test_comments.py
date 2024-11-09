@@ -31,7 +31,7 @@ class TestComments:
             annotation=0,
             draft=0,
             is_resolved=True,
-            text="string",
+            text="text",
         )
         assert_matches_type(Comment, comment, path=["response"])
 
@@ -58,14 +58,14 @@ class TestComments:
     @parametrize
     def test_method_retrieve(self, client: LabelStudio) -> None:
         comment = client.comments.retrieve(
-            "string",
+            "id",
         )
         assert_matches_type(Comment, comment, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: LabelStudio) -> None:
         response = client.comments.with_raw_response.retrieve(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -76,7 +76,7 @@ class TestComments:
     @parametrize
     def test_streaming_response_retrieve(self, client: LabelStudio) -> None:
         with client.comments.with_streaming_response.retrieve(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -96,25 +96,25 @@ class TestComments:
     @parametrize
     def test_method_update(self, client: LabelStudio) -> None:
         comment = client.comments.update(
-            "string",
+            id="id",
         )
         assert_matches_type(Comment, comment, path=["response"])
 
     @parametrize
     def test_method_update_with_all_params(self, client: LabelStudio) -> None:
         comment = client.comments.update(
-            "string",
+            id="id",
             annotation=0,
             draft=0,
             is_resolved=True,
-            text="string",
+            text="text",
         )
         assert_matches_type(Comment, comment, path=["response"])
 
     @parametrize
     def test_raw_response_update(self, client: LabelStudio) -> None:
         response = client.comments.with_raw_response.update(
-            "string",
+            id="id",
         )
 
         assert response.is_closed is True
@@ -125,7 +125,7 @@ class TestComments:
     @parametrize
     def test_streaming_response_update(self, client: LabelStudio) -> None:
         with client.comments.with_streaming_response.update(
-            "string",
+            id="id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -139,7 +139,7 @@ class TestComments:
     def test_path_params_update(self, client: LabelStudio) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.comments.with_raw_response.update(
-                "",
+                id="",
             )
 
     @parametrize
@@ -150,7 +150,7 @@ class TestComments:
     @parametrize
     def test_method_list_with_all_params(self, client: LabelStudio) -> None:
         comment = client.comments.list(
-            ordering="string",
+            ordering="ordering",
         )
         assert_matches_type(CommentListResponse, comment, path=["response"])
 
@@ -177,14 +177,14 @@ class TestComments:
     @parametrize
     def test_method_delete(self, client: LabelStudio) -> None:
         comment = client.comments.delete(
-            "string",
+            "id",
         )
         assert comment is None
 
     @parametrize
     def test_raw_response_delete(self, client: LabelStudio) -> None:
         response = client.comments.with_raw_response.delete(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -195,7 +195,7 @@ class TestComments:
     @parametrize
     def test_streaming_response_delete(self, client: LabelStudio) -> None:
         with client.comments.with_streaming_response.delete(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -227,7 +227,7 @@ class TestAsyncComments:
             annotation=0,
             draft=0,
             is_resolved=True,
-            text="string",
+            text="text",
         )
         assert_matches_type(Comment, comment, path=["response"])
 
@@ -254,14 +254,14 @@ class TestAsyncComments:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncLabelStudio) -> None:
         comment = await async_client.comments.retrieve(
-            "string",
+            "id",
         )
         assert_matches_type(Comment, comment, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncLabelStudio) -> None:
         response = await async_client.comments.with_raw_response.retrieve(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -272,7 +272,7 @@ class TestAsyncComments:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncLabelStudio) -> None:
         async with async_client.comments.with_streaming_response.retrieve(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -292,25 +292,25 @@ class TestAsyncComments:
     @parametrize
     async def test_method_update(self, async_client: AsyncLabelStudio) -> None:
         comment = await async_client.comments.update(
-            "string",
+            id="id",
         )
         assert_matches_type(Comment, comment, path=["response"])
 
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncLabelStudio) -> None:
         comment = await async_client.comments.update(
-            "string",
+            id="id",
             annotation=0,
             draft=0,
             is_resolved=True,
-            text="string",
+            text="text",
         )
         assert_matches_type(Comment, comment, path=["response"])
 
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncLabelStudio) -> None:
         response = await async_client.comments.with_raw_response.update(
-            "string",
+            id="id",
         )
 
         assert response.is_closed is True
@@ -321,7 +321,7 @@ class TestAsyncComments:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncLabelStudio) -> None:
         async with async_client.comments.with_streaming_response.update(
-            "string",
+            id="id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -335,7 +335,7 @@ class TestAsyncComments:
     async def test_path_params_update(self, async_client: AsyncLabelStudio) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.comments.with_raw_response.update(
-                "",
+                id="",
             )
 
     @parametrize
@@ -346,7 +346,7 @@ class TestAsyncComments:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncLabelStudio) -> None:
         comment = await async_client.comments.list(
-            ordering="string",
+            ordering="ordering",
         )
         assert_matches_type(CommentListResponse, comment, path=["response"])
 
@@ -373,14 +373,14 @@ class TestAsyncComments:
     @parametrize
     async def test_method_delete(self, async_client: AsyncLabelStudio) -> None:
         comment = await async_client.comments.delete(
-            "string",
+            "id",
         )
         assert comment is None
 
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncLabelStudio) -> None:
         response = await async_client.comments.with_raw_response.delete(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -391,7 +391,7 @@ class TestAsyncComments:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncLabelStudio) -> None:
         async with async_client.comments.with_streaming_response.delete(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
