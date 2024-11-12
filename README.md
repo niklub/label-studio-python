@@ -31,8 +31,7 @@ import os
 from label_studio import LabelStudio
 
 client = LabelStudio(
-    # This is the default and can be omitted
-    token=os.environ.get("LABEL_STUDIO_TOKEN"),
+    token=os.environ.get("LABEL_STUDIO_TOKEN"),  # This is the default and can be omitted
 )
 
 comment = client.comments.create()
@@ -54,8 +53,7 @@ import asyncio
 from label_studio import AsyncLabelStudio
 
 client = AsyncLabelStudio(
-    # This is the default and can be omitted
-    token=os.environ.get("LABEL_STUDIO_TOKEN"),
+    token=os.environ.get("LABEL_STUDIO_TOKEN"),  # This is the default and can be omitted
 )
 
 
