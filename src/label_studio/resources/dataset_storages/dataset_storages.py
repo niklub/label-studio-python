@@ -2,6 +2,22 @@
 
 from __future__ import annotations
 
+from .s3 import (
+    S3Resource,
+    AsyncS3Resource,
+    S3ResourceWithRawResponse,
+    AsyncS3ResourceWithRawResponse,
+    S3ResourceWithStreamingResponse,
+    AsyncS3ResourceWithStreamingResponse,
+)
+from .gcs import (
+    GcsResource,
+    AsyncGcsResource,
+    GcsResourceWithRawResponse,
+    AsyncGcsResourceWithRawResponse,
+    GcsResourceWithStreamingResponse,
+    AsyncGcsResourceWithStreamingResponse,
+)
 from .azure import (
     AzureResource,
     AsyncAzureResource,
@@ -10,14 +26,7 @@ from .azure import (
     AzureResourceWithStreamingResponse,
     AsyncAzureResourceWithStreamingResponse,
 )
-from .s3.s3 import (
-    S3Resource,
-    AsyncS3Resource,
-    S3ResourceWithRawResponse,
-    AsyncS3ResourceWithRawResponse,
-    S3ResourceWithStreamingResponse,
-    AsyncS3ResourceWithStreamingResponse,
-)
+from .s3.s3 import S3Resource, AsyncS3Resource
 from .types import (
     TypesResource,
     AsyncTypesResource,
@@ -26,14 +35,7 @@ from .types import (
     TypesResourceWithStreamingResponse,
     AsyncTypesResourceWithStreamingResponse,
 )
-from .gcs.gcs import (
-    GcsResource,
-    AsyncGcsResource,
-    GcsResourceWithRawResponse,
-    AsyncGcsResourceWithRawResponse,
-    GcsResourceWithStreamingResponse,
-    AsyncGcsResourceWithStreamingResponse,
-)
+from .gcs.gcs import GcsResource, AsyncGcsResource
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 

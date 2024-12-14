@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
-from .organizations.organizations import (
+from .organizations import (
     OrganizationsResource,
     AsyncOrganizationsResource,
     OrganizationsResourceWithRawResponse,
@@ -12,6 +12,7 @@ from .organizations.organizations import (
     OrganizationsResourceWithStreamingResponse,
     AsyncOrganizationsResourceWithStreamingResponse,
 )
+from .organizations.organizations import OrganizationsResource, AsyncOrganizationsResource
 
 __all__ = ["DashboardsResource", "AsyncDashboardsResource"]
 

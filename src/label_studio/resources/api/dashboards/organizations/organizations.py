@@ -2,9 +2,7 @@
 
 from __future__ import annotations
 
-from ....._compat import cached_property
-from ....._resource import SyncAPIResource, AsyncAPIResource
-from .charts.charts import (
+from .charts import (
     ChartsResource,
     AsyncChartsResource,
     ChartsResourceWithRawResponse,
@@ -12,6 +10,9 @@ from .charts.charts import (
     ChartsResourceWithStreamingResponse,
     AsyncChartsResourceWithStreamingResponse,
 )
+from ....._compat import cached_property
+from ....._resource import SyncAPIResource, AsyncAPIResource
+from .charts.charts import ChartsResource, AsyncChartsResource
 
 __all__ = ["OrganizationsResource", "AsyncOrganizationsResource"]
 
