@@ -8,7 +8,7 @@ from typing_extensions import Self, override
 
 import httpx
 
-from . import resources, _exceptions
+from . import _exceptions
 from ._qs import Querystring
 from ._types import (
     NOT_GIVEN,
@@ -24,6 +24,7 @@ from ._utils import (
     get_async_library,
 )
 from ._version import __version__
+from .resources import ml, tasks, comments, projects, annotations, current_user, annotation_history, annotation_reviews
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, LabelStudioError
 from ._base_client import (
@@ -31,13 +32,14 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
+from .resources.api import api
+from .resources.dataset_storages import dataset_storages
 
 __all__ = [
     "Timeout",
     "Transport",
     "ProxiesTypes",
     "RequestOptions",
-    "resources",
     "LabelStudio",
     "AsyncLabelStudio",
     "Client",
@@ -46,16 +48,16 @@ __all__ = [
 
 
 class LabelStudio(SyncAPIClient):
-    annotation_history: resources.AnnotationHistoryResource
-    annotation_reviews: resources.AnnotationReviewsResource
-    annotations: resources.AnnotationsResource
-    comments: resources.CommentsResource
-    current_user: resources.CurrentUserResource
-    ml: resources.MlResource
-    projects: resources.ProjectsResource
-    tasks: resources.TasksResource
-    api: resources.APIResource
-    dataset_storages: resources.DatasetStoragesResource
+    annotation_history: annotation_history.AnnotationHistoryResource
+    annotation_reviews: annotation_reviews.AnnotationReviewsResource
+    annotations: annotations.AnnotationsResource
+    comments: comments.CommentsResource
+    current_user: current_user.CurrentUserResource
+    ml: ml.MlResource
+    projects: projects.ProjectsResource
+    tasks: tasks.TasksResource
+    api: api.APIResource
+    dataset_storages: dataset_storages.DatasetStoragesResource
     with_raw_response: LabelStudioWithRawResponse
     with_streaming_response: LabelStudioWithStreamedResponse
 
@@ -113,16 +115,16 @@ class LabelStudio(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.annotation_history = resources.AnnotationHistoryResource(self)
-        self.annotation_reviews = resources.AnnotationReviewsResource(self)
-        self.annotations = resources.AnnotationsResource(self)
-        self.comments = resources.CommentsResource(self)
-        self.current_user = resources.CurrentUserResource(self)
-        self.ml = resources.MlResource(self)
-        self.projects = resources.ProjectsResource(self)
-        self.tasks = resources.TasksResource(self)
-        self.api = resources.APIResource(self)
-        self.dataset_storages = resources.DatasetStoragesResource(self)
+        self.annotation_history = annotation_history.AnnotationHistoryResource(self)
+        self.annotation_reviews = annotation_reviews.AnnotationReviewsResource(self)
+        self.annotations = annotations.AnnotationsResource(self)
+        self.comments = comments.CommentsResource(self)
+        self.current_user = current_user.CurrentUserResource(self)
+        self.ml = ml.MlResource(self)
+        self.projects = projects.ProjectsResource(self)
+        self.tasks = tasks.TasksResource(self)
+        self.api = api.APIResource(self)
+        self.dataset_storages = dataset_storages.DatasetStoragesResource(self)
         self.with_raw_response = LabelStudioWithRawResponse(self)
         self.with_streaming_response = LabelStudioWithStreamedResponse(self)
 
@@ -232,16 +234,16 @@ class LabelStudio(SyncAPIClient):
 
 
 class AsyncLabelStudio(AsyncAPIClient):
-    annotation_history: resources.AsyncAnnotationHistoryResource
-    annotation_reviews: resources.AsyncAnnotationReviewsResource
-    annotations: resources.AsyncAnnotationsResource
-    comments: resources.AsyncCommentsResource
-    current_user: resources.AsyncCurrentUserResource
-    ml: resources.AsyncMlResource
-    projects: resources.AsyncProjectsResource
-    tasks: resources.AsyncTasksResource
-    api: resources.AsyncAPIResource
-    dataset_storages: resources.AsyncDatasetStoragesResource
+    annotation_history: annotation_history.AsyncAnnotationHistoryResource
+    annotation_reviews: annotation_reviews.AsyncAnnotationReviewsResource
+    annotations: annotations.AsyncAnnotationsResource
+    comments: comments.AsyncCommentsResource
+    current_user: current_user.AsyncCurrentUserResource
+    ml: ml.AsyncMlResource
+    projects: projects.AsyncProjectsResource
+    tasks: tasks.AsyncTasksResource
+    api: api.AsyncAPIResource
+    dataset_storages: dataset_storages.AsyncDatasetStoragesResource
     with_raw_response: AsyncLabelStudioWithRawResponse
     with_streaming_response: AsyncLabelStudioWithStreamedResponse
 
@@ -299,16 +301,16 @@ class AsyncLabelStudio(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.annotation_history = resources.AsyncAnnotationHistoryResource(self)
-        self.annotation_reviews = resources.AsyncAnnotationReviewsResource(self)
-        self.annotations = resources.AsyncAnnotationsResource(self)
-        self.comments = resources.AsyncCommentsResource(self)
-        self.current_user = resources.AsyncCurrentUserResource(self)
-        self.ml = resources.AsyncMlResource(self)
-        self.projects = resources.AsyncProjectsResource(self)
-        self.tasks = resources.AsyncTasksResource(self)
-        self.api = resources.AsyncAPIResource(self)
-        self.dataset_storages = resources.AsyncDatasetStoragesResource(self)
+        self.annotation_history = annotation_history.AsyncAnnotationHistoryResource(self)
+        self.annotation_reviews = annotation_reviews.AsyncAnnotationReviewsResource(self)
+        self.annotations = annotations.AsyncAnnotationsResource(self)
+        self.comments = comments.AsyncCommentsResource(self)
+        self.current_user = current_user.AsyncCurrentUserResource(self)
+        self.ml = ml.AsyncMlResource(self)
+        self.projects = projects.AsyncProjectsResource(self)
+        self.tasks = tasks.AsyncTasksResource(self)
+        self.api = api.AsyncAPIResource(self)
+        self.dataset_storages = dataset_storages.AsyncDatasetStoragesResource(self)
         self.with_raw_response = AsyncLabelStudioWithRawResponse(self)
         self.with_streaming_response = AsyncLabelStudioWithStreamedResponse(self)
 
@@ -419,62 +421,72 @@ class AsyncLabelStudio(AsyncAPIClient):
 
 class LabelStudioWithRawResponse:
     def __init__(self, client: LabelStudio) -> None:
-        self.annotation_history = resources.AnnotationHistoryResourceWithRawResponse(client.annotation_history)
-        self.annotation_reviews = resources.AnnotationReviewsResourceWithRawResponse(client.annotation_reviews)
-        self.annotations = resources.AnnotationsResourceWithRawResponse(client.annotations)
-        self.comments = resources.CommentsResourceWithRawResponse(client.comments)
-        self.current_user = resources.CurrentUserResourceWithRawResponse(client.current_user)
-        self.ml = resources.MlResourceWithRawResponse(client.ml)
-        self.projects = resources.ProjectsResourceWithRawResponse(client.projects)
-        self.tasks = resources.TasksResourceWithRawResponse(client.tasks)
-        self.api = resources.APIResourceWithRawResponse(client.api)
-        self.dataset_storages = resources.DatasetStoragesResourceWithRawResponse(client.dataset_storages)
+        self.annotation_history = annotation_history.AnnotationHistoryResourceWithRawResponse(client.annotation_history)
+        self.annotation_reviews = annotation_reviews.AnnotationReviewsResourceWithRawResponse(client.annotation_reviews)
+        self.annotations = annotations.AnnotationsResourceWithRawResponse(client.annotations)
+        self.comments = comments.CommentsResourceWithRawResponse(client.comments)
+        self.current_user = current_user.CurrentUserResourceWithRawResponse(client.current_user)
+        self.ml = ml.MlResourceWithRawResponse(client.ml)
+        self.projects = projects.ProjectsResourceWithRawResponse(client.projects)
+        self.tasks = tasks.TasksResourceWithRawResponse(client.tasks)
+        self.api = api.APIResourceWithRawResponse(client.api)
+        self.dataset_storages = dataset_storages.DatasetStoragesResourceWithRawResponse(client.dataset_storages)
 
 
 class AsyncLabelStudioWithRawResponse:
     def __init__(self, client: AsyncLabelStudio) -> None:
-        self.annotation_history = resources.AsyncAnnotationHistoryResourceWithRawResponse(client.annotation_history)
-        self.annotation_reviews = resources.AsyncAnnotationReviewsResourceWithRawResponse(client.annotation_reviews)
-        self.annotations = resources.AsyncAnnotationsResourceWithRawResponse(client.annotations)
-        self.comments = resources.AsyncCommentsResourceWithRawResponse(client.comments)
-        self.current_user = resources.AsyncCurrentUserResourceWithRawResponse(client.current_user)
-        self.ml = resources.AsyncMlResourceWithRawResponse(client.ml)
-        self.projects = resources.AsyncProjectsResourceWithRawResponse(client.projects)
-        self.tasks = resources.AsyncTasksResourceWithRawResponse(client.tasks)
-        self.api = resources.AsyncAPIResourceWithRawResponse(client.api)
-        self.dataset_storages = resources.AsyncDatasetStoragesResourceWithRawResponse(client.dataset_storages)
+        self.annotation_history = annotation_history.AsyncAnnotationHistoryResourceWithRawResponse(
+            client.annotation_history
+        )
+        self.annotation_reviews = annotation_reviews.AsyncAnnotationReviewsResourceWithRawResponse(
+            client.annotation_reviews
+        )
+        self.annotations = annotations.AsyncAnnotationsResourceWithRawResponse(client.annotations)
+        self.comments = comments.AsyncCommentsResourceWithRawResponse(client.comments)
+        self.current_user = current_user.AsyncCurrentUserResourceWithRawResponse(client.current_user)
+        self.ml = ml.AsyncMlResourceWithRawResponse(client.ml)
+        self.projects = projects.AsyncProjectsResourceWithRawResponse(client.projects)
+        self.tasks = tasks.AsyncTasksResourceWithRawResponse(client.tasks)
+        self.api = api.AsyncAPIResourceWithRawResponse(client.api)
+        self.dataset_storages = dataset_storages.AsyncDatasetStoragesResourceWithRawResponse(client.dataset_storages)
 
 
 class LabelStudioWithStreamedResponse:
     def __init__(self, client: LabelStudio) -> None:
-        self.annotation_history = resources.AnnotationHistoryResourceWithStreamingResponse(client.annotation_history)
-        self.annotation_reviews = resources.AnnotationReviewsResourceWithStreamingResponse(client.annotation_reviews)
-        self.annotations = resources.AnnotationsResourceWithStreamingResponse(client.annotations)
-        self.comments = resources.CommentsResourceWithStreamingResponse(client.comments)
-        self.current_user = resources.CurrentUserResourceWithStreamingResponse(client.current_user)
-        self.ml = resources.MlResourceWithStreamingResponse(client.ml)
-        self.projects = resources.ProjectsResourceWithStreamingResponse(client.projects)
-        self.tasks = resources.TasksResourceWithStreamingResponse(client.tasks)
-        self.api = resources.APIResourceWithStreamingResponse(client.api)
-        self.dataset_storages = resources.DatasetStoragesResourceWithStreamingResponse(client.dataset_storages)
+        self.annotation_history = annotation_history.AnnotationHistoryResourceWithStreamingResponse(
+            client.annotation_history
+        )
+        self.annotation_reviews = annotation_reviews.AnnotationReviewsResourceWithStreamingResponse(
+            client.annotation_reviews
+        )
+        self.annotations = annotations.AnnotationsResourceWithStreamingResponse(client.annotations)
+        self.comments = comments.CommentsResourceWithStreamingResponse(client.comments)
+        self.current_user = current_user.CurrentUserResourceWithStreamingResponse(client.current_user)
+        self.ml = ml.MlResourceWithStreamingResponse(client.ml)
+        self.projects = projects.ProjectsResourceWithStreamingResponse(client.projects)
+        self.tasks = tasks.TasksResourceWithStreamingResponse(client.tasks)
+        self.api = api.APIResourceWithStreamingResponse(client.api)
+        self.dataset_storages = dataset_storages.DatasetStoragesResourceWithStreamingResponse(client.dataset_storages)
 
 
 class AsyncLabelStudioWithStreamedResponse:
     def __init__(self, client: AsyncLabelStudio) -> None:
-        self.annotation_history = resources.AsyncAnnotationHistoryResourceWithStreamingResponse(
+        self.annotation_history = annotation_history.AsyncAnnotationHistoryResourceWithStreamingResponse(
             client.annotation_history
         )
-        self.annotation_reviews = resources.AsyncAnnotationReviewsResourceWithStreamingResponse(
+        self.annotation_reviews = annotation_reviews.AsyncAnnotationReviewsResourceWithStreamingResponse(
             client.annotation_reviews
         )
-        self.annotations = resources.AsyncAnnotationsResourceWithStreamingResponse(client.annotations)
-        self.comments = resources.AsyncCommentsResourceWithStreamingResponse(client.comments)
-        self.current_user = resources.AsyncCurrentUserResourceWithStreamingResponse(client.current_user)
-        self.ml = resources.AsyncMlResourceWithStreamingResponse(client.ml)
-        self.projects = resources.AsyncProjectsResourceWithStreamingResponse(client.projects)
-        self.tasks = resources.AsyncTasksResourceWithStreamingResponse(client.tasks)
-        self.api = resources.AsyncAPIResourceWithStreamingResponse(client.api)
-        self.dataset_storages = resources.AsyncDatasetStoragesResourceWithStreamingResponse(client.dataset_storages)
+        self.annotations = annotations.AsyncAnnotationsResourceWithStreamingResponse(client.annotations)
+        self.comments = comments.AsyncCommentsResourceWithStreamingResponse(client.comments)
+        self.current_user = current_user.AsyncCurrentUserResourceWithStreamingResponse(client.current_user)
+        self.ml = ml.AsyncMlResourceWithStreamingResponse(client.ml)
+        self.projects = projects.AsyncProjectsResourceWithStreamingResponse(client.projects)
+        self.tasks = tasks.AsyncTasksResourceWithStreamingResponse(client.tasks)
+        self.api = api.AsyncAPIResourceWithStreamingResponse(client.api)
+        self.dataset_storages = dataset_storages.AsyncDatasetStoragesResourceWithStreamingResponse(
+            client.dataset_storages
+        )
 
 
 Client = LabelStudio
