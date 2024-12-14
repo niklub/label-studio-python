@@ -4,13 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
-from ...._utils import (
-    maybe_transform,
-    async_maybe_transform,
-)
-from ...._compat import cached_property
-from .azure.azure import (
+from .azure import (
     AzureResource,
     AsyncAzureResource,
     AzureResourceWithRawResponse,
@@ -18,6 +12,13 @@ from .azure.azure import (
     AzureResourceWithStreamingResponse,
     AsyncAzureResourceWithStreamingResponse,
 )
+from ...._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from ...._utils import (
+    maybe_transform,
+    async_maybe_transform,
+)
+from ...._compat import cached_property
+from .azure.azure import AzureResource, AsyncAzureResource
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
     to_raw_response_wrapper,
