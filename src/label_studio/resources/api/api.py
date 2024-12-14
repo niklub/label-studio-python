@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 from ..._compat import cached_property
-from .dashboards import (
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from .dashboards.dashboards import (
     DashboardsResource,
     AsyncDashboardsResource,
     DashboardsResourceWithRawResponse,
@@ -11,8 +12,7 @@ from .dashboards import (
     DashboardsResourceWithStreamingResponse,
     AsyncDashboardsResourceWithStreamingResponse,
 )
-from ..._resource import SyncAPIResource, AsyncAPIResource
-from .dataset_storages import (
+from .dataset_storages.dataset_storages import (
     DatasetStoragesResource,
     AsyncDatasetStoragesResource,
     DatasetStoragesResourceWithRawResponse,
@@ -20,8 +20,6 @@ from .dataset_storages import (
     DatasetStoragesResourceWithStreamingResponse,
     AsyncDatasetStoragesResourceWithStreamingResponse,
 )
-from .dashboards.dashboards import DashboardsResource, AsyncDashboardsResource
-from .dataset_storages.dataset_storages import DatasetStoragesResource, AsyncDatasetStoragesResource
 
 __all__ = ["APIResource", "AsyncAPIResource"]
 
