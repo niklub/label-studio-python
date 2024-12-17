@@ -4,12 +4,16 @@ from __future__ import annotations
 
 import gc
 import os
+import sys
 import json
 import asyncio
 import inspect
+import subprocess
 import tracemalloc
 from typing import Any, Union, cast
+from textwrap import dedent
 from unittest import mock
+from typing_extensions import Literal
 
 import httpx
 import pytest
@@ -17,6 +21,7 @@ from respx import MockRouter
 from pydantic import ValidationError
 
 from label_studio import LabelStudio, AsyncLabelStudio, APIResponseValidationError
+from label_studio._types import Omit
 from label_studio._models import BaseModel, FinalRequestOptions
 from label_studio._constants import RAW_RESPONSE_HEADER
 from label_studio._exceptions import APIStatusError, APITimeoutError, LabelStudioError, APIResponseValidationError
@@ -329,7 +334,8 @@ class TestLabelStudio:
         assert request.headers.get("Authorization") == token
 
         with pytest.raises(LabelStudioError):
-            client2 = LabelStudio(base_url=base_url, token=None, _strict_response_validation=True)
+            with update_env(**{"LABEL_STUDIO_TOKEN": Omit()}):
+                client2 = LabelStudio(base_url=base_url, token=None, _strict_response_validation=True)
             _ = client2
 
     def test_default_query_option(self) -> None:
@@ -685,6 +691,7 @@ class TestLabelStudio:
             [3, "", 0.5],
             [2, "", 0.5 * 2.0],
             [1, "", 0.5 * 4.0],
+            [-1100, "", 8],  # test large number potentially overflowing
         ],
     )
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
@@ -725,6 +732,83 @@ class TestLabelStudio:
             )
 
         assert _get_open_connections(self.client) == 0
+
+    @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
+    @mock.patch("label_studio._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
+    @pytest.mark.parametrize("failure_mode", ["status", "exception"])
+    def test_retries_taken(
+        self,
+        client: LabelStudio,
+        failures_before_success: int,
+        failure_mode: Literal["status", "exception"],
+        respx_mock: MockRouter,
+    ) -> None:
+        client = client.with_options(max_retries=4)
+
+        nb_retries = 0
+
+        def retry_handler(_request: httpx.Request) -> httpx.Response:
+            nonlocal nb_retries
+            if nb_retries < failures_before_success:
+                nb_retries += 1
+                if failure_mode == "exception":
+                    raise RuntimeError("oops")
+                return httpx.Response(500)
+            return httpx.Response(200)
+
+        respx_mock.post("/api/comments/").mock(side_effect=retry_handler)
+
+        response = client.comments.with_raw_response.create()
+
+        assert response.retries_taken == failures_before_success
+        assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
+
+    @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
+    @mock.patch("label_studio._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
+    def test_omit_retry_count_header(
+        self, client: LabelStudio, failures_before_success: int, respx_mock: MockRouter
+    ) -> None:
+        client = client.with_options(max_retries=4)
+
+        nb_retries = 0
+
+        def retry_handler(_request: httpx.Request) -> httpx.Response:
+            nonlocal nb_retries
+            if nb_retries < failures_before_success:
+                nb_retries += 1
+                return httpx.Response(500)
+            return httpx.Response(200)
+
+        respx_mock.post("/api/comments/").mock(side_effect=retry_handler)
+
+        response = client.comments.with_raw_response.create(extra_headers={"x-stainless-retry-count": Omit()})
+
+        assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
+
+    @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
+    @mock.patch("label_studio._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
+    def test_overwrite_retry_count_header(
+        self, client: LabelStudio, failures_before_success: int, respx_mock: MockRouter
+    ) -> None:
+        client = client.with_options(max_retries=4)
+
+        nb_retries = 0
+
+        def retry_handler(_request: httpx.Request) -> httpx.Response:
+            nonlocal nb_retries
+            if nb_retries < failures_before_success:
+                nb_retries += 1
+                return httpx.Response(500)
+            return httpx.Response(200)
+
+        respx_mock.post("/api/comments/").mock(side_effect=retry_handler)
+
+        response = client.comments.with_raw_response.create(extra_headers={"x-stainless-retry-count": "42"})
+
+        assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
 
 class TestAsyncLabelStudio:
@@ -1009,7 +1093,8 @@ class TestAsyncLabelStudio:
         assert request.headers.get("Authorization") == token
 
         with pytest.raises(LabelStudioError):
-            client2 = AsyncLabelStudio(base_url=base_url, token=None, _strict_response_validation=True)
+            with update_env(**{"LABEL_STUDIO_TOKEN": Omit()}):
+                client2 = AsyncLabelStudio(base_url=base_url, token=None, _strict_response_validation=True)
             _ = client2
 
     def test_default_query_option(self) -> None:
@@ -1378,6 +1463,7 @@ class TestAsyncLabelStudio:
             [3, "", 0.5],
             [2, "", 0.5 * 2.0],
             [1, "", 0.5 * 4.0],
+            [-1100, "", 8],  # test large number potentially overflowing
         ],
     )
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
@@ -1419,3 +1505,118 @@ class TestAsyncLabelStudio:
             )
 
         assert _get_open_connections(self.client) == 0
+
+    @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
+    @mock.patch("label_studio._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("failure_mode", ["status", "exception"])
+    async def test_retries_taken(
+        self,
+        async_client: AsyncLabelStudio,
+        failures_before_success: int,
+        failure_mode: Literal["status", "exception"],
+        respx_mock: MockRouter,
+    ) -> None:
+        client = async_client.with_options(max_retries=4)
+
+        nb_retries = 0
+
+        def retry_handler(_request: httpx.Request) -> httpx.Response:
+            nonlocal nb_retries
+            if nb_retries < failures_before_success:
+                nb_retries += 1
+                if failure_mode == "exception":
+                    raise RuntimeError("oops")
+                return httpx.Response(500)
+            return httpx.Response(200)
+
+        respx_mock.post("/api/comments/").mock(side_effect=retry_handler)
+
+        response = await client.comments.with_raw_response.create()
+
+        assert response.retries_taken == failures_before_success
+        assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
+
+    @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
+    @mock.patch("label_studio._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
+    @pytest.mark.asyncio
+    async def test_omit_retry_count_header(
+        self, async_client: AsyncLabelStudio, failures_before_success: int, respx_mock: MockRouter
+    ) -> None:
+        client = async_client.with_options(max_retries=4)
+
+        nb_retries = 0
+
+        def retry_handler(_request: httpx.Request) -> httpx.Response:
+            nonlocal nb_retries
+            if nb_retries < failures_before_success:
+                nb_retries += 1
+                return httpx.Response(500)
+            return httpx.Response(200)
+
+        respx_mock.post("/api/comments/").mock(side_effect=retry_handler)
+
+        response = await client.comments.with_raw_response.create(extra_headers={"x-stainless-retry-count": Omit()})
+
+        assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
+
+    @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
+    @mock.patch("label_studio._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
+    @pytest.mark.asyncio
+    async def test_overwrite_retry_count_header(
+        self, async_client: AsyncLabelStudio, failures_before_success: int, respx_mock: MockRouter
+    ) -> None:
+        client = async_client.with_options(max_retries=4)
+
+        nb_retries = 0
+
+        def retry_handler(_request: httpx.Request) -> httpx.Response:
+            nonlocal nb_retries
+            if nb_retries < failures_before_success:
+                nb_retries += 1
+                return httpx.Response(500)
+            return httpx.Response(200)
+
+        respx_mock.post("/api/comments/").mock(side_effect=retry_handler)
+
+        response = await client.comments.with_raw_response.create(extra_headers={"x-stainless-retry-count": "42"})
+
+        assert response.http_request.headers.get("x-stainless-retry-count") == "42"
+
+    def test_get_platform(self) -> None:
+        # A previous implementation of asyncify could leave threads unterminated when
+        # used with nest_asyncio.
+        #
+        # Since nest_asyncio.apply() is global and cannot be un-applied, this
+        # test is run in a separate process to avoid affecting other tests.
+        test_code = dedent("""
+        import asyncio
+        import nest_asyncio
+        import threading
+
+        from label_studio._utils import asyncify
+        from label_studio._base_client import get_platform 
+
+        async def test_main() -> None:
+            result = await asyncify(get_platform)()
+            print(result)
+            for thread in threading.enumerate():
+                print(thread.name)
+
+        nest_asyncio.apply()
+        asyncio.run(test_main())
+        """)
+        with subprocess.Popen(
+            [sys.executable, "-c", test_code],
+            text=True,
+        ) as process:
+            try:
+                process.wait(2)
+                if process.returncode:
+                    raise AssertionError("calling get_platform using asyncify resulted in a non-zero exit code")
+            except subprocess.TimeoutExpired as e:
+                process.kill()
+                raise AssertionError("calling get_platform using asyncify resulted in a hung process") from e

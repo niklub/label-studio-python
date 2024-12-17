@@ -29,9 +29,7 @@ from ...._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...._base_client import (
-    make_request_options,
-)
+from ...._base_client import make_request_options
 from ....types.dataset_storages import (
     gc_list_params,
     gc_sync_params,
@@ -53,10 +51,21 @@ class GcsResource(SyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> GcsResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#accessing-raw-response-data-eg-headers
+        """
         return GcsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> GcsResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#with_streaming_response
+        """
         return GcsResourceWithStreamingResponse(self)
 
     def create(
@@ -725,10 +734,21 @@ class AsyncGcsResource(AsyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> AsyncGcsResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncGcsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncGcsResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#with_streaming_response
+        """
         return AsyncGcsResourceWithStreamingResponse(self)
 
     async def create(

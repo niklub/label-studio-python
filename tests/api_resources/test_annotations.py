@@ -52,18 +52,18 @@ class TestAnnotations:
     @parametrize
     def test_method_update(self, client: LabelStudio) -> None:
         annotation = client.annotations.update(
-            0,
+            id=0,
         )
         assert_matches_type(Annotation, annotation, path=["response"])
 
     @parametrize
     def test_method_update_with_all_params(self, client: LabelStudio) -> None:
         annotation = client.annotations.update(
-            0,
+            id=0,
             completed_by=0,
             draft_created_at=parse_datetime("2019-12-27T18:11:19.117Z"),
             ground_truth=True,
-            import_id=-9223372036854776000,
+            import_id=-9007199254740991,
             last_action="prediction",
             last_created_by=0,
             lead_time=0,
@@ -81,7 +81,7 @@ class TestAnnotations:
     @parametrize
     def test_raw_response_update(self, client: LabelStudio) -> None:
         response = client.annotations.with_raw_response.update(
-            0,
+            id=0,
         )
 
         assert response.is_closed is True
@@ -92,7 +92,7 @@ class TestAnnotations:
     @parametrize
     def test_streaming_response_update(self, client: LabelStudio) -> None:
         with client.annotations.with_streaming_response.update(
-            0,
+            id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -171,18 +171,18 @@ class TestAsyncAnnotations:
     @parametrize
     async def test_method_update(self, async_client: AsyncLabelStudio) -> None:
         annotation = await async_client.annotations.update(
-            0,
+            id=0,
         )
         assert_matches_type(Annotation, annotation, path=["response"])
 
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncLabelStudio) -> None:
         annotation = await async_client.annotations.update(
-            0,
+            id=0,
             completed_by=0,
             draft_created_at=parse_datetime("2019-12-27T18:11:19.117Z"),
             ground_truth=True,
-            import_id=-9223372036854776000,
+            import_id=-9007199254740991,
             last_action="prediction",
             last_created_by=0,
             lead_time=0,
@@ -200,7 +200,7 @@ class TestAsyncAnnotations:
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncLabelStudio) -> None:
         response = await async_client.annotations.with_raw_response.update(
-            0,
+            id=0,
         )
 
         assert response.is_closed is True
@@ -211,7 +211,7 @@ class TestAsyncAnnotations:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncLabelStudio) -> None:
         async with async_client.annotations.with_streaming_response.update(
-            0,
+            id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

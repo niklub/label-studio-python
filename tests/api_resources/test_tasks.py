@@ -39,7 +39,7 @@ class TestTasks:
             comment_authors=[0],
             comment_count=-2147483648,
             file_upload=0,
-            inner_id=-9223372036854776000,
+            inner_id=-9007199254740991,
             is_labeled=True,
             last_comment_updated_at=parse_datetime("2019-12-27T18:11:19.117Z"),
             meta={},
@@ -79,7 +79,7 @@ class TestTasks:
     @parametrize
     def test_method_update(self, client: LabelStudio) -> None:
         task = client.tasks.update(
-            "string",
+            id="id",
             data={},
         )
         assert_matches_type(TaskUpdateResponse, task, path=["response"])
@@ -87,13 +87,13 @@ class TestTasks:
     @parametrize
     def test_method_update_with_all_params(self, client: LabelStudio) -> None:
         task = client.tasks.update(
-            "string",
+            id="id",
             data={},
             cancelled_annotations=-2147483648,
             comment_authors=[0],
             comment_count=-2147483648,
             file_upload=0,
-            inner_id=-9223372036854776000,
+            inner_id=-9007199254740991,
             is_labeled=True,
             last_comment_updated_at=parse_datetime("2019-12-27T18:11:19.117Z"),
             meta={},
@@ -109,7 +109,7 @@ class TestTasks:
     @parametrize
     def test_raw_response_update(self, client: LabelStudio) -> None:
         response = client.tasks.with_raw_response.update(
-            "string",
+            id="id",
             data={},
         )
 
@@ -121,7 +121,7 @@ class TestTasks:
     @parametrize
     def test_streaming_response_update(self, client: LabelStudio) -> None:
         with client.tasks.with_streaming_response.update(
-            "string",
+            id="id",
             data={},
         ) as response:
             assert not response.is_closed
@@ -136,7 +136,7 @@ class TestTasks:
     def test_path_params_update(self, client: LabelStudio) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.tasks.with_raw_response.update(
-                "",
+                id="",
                 data={},
             )
 
@@ -179,14 +179,14 @@ class TestTasks:
     @parametrize
     def test_method_delete(self, client: LabelStudio) -> None:
         task = client.tasks.delete(
-            "string",
+            "id",
         )
         assert task is None
 
     @parametrize
     def test_raw_response_delete(self, client: LabelStudio) -> None:
         response = client.tasks.with_raw_response.delete(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -197,7 +197,7 @@ class TestTasks:
     @parametrize
     def test_streaming_response_delete(self, client: LabelStudio) -> None:
         with client.tasks.with_streaming_response.delete(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -217,14 +217,14 @@ class TestTasks:
     @parametrize
     def test_method_get(self, client: LabelStudio) -> None:
         task = client.tasks.get(
-            "string",
+            "id",
         )
         assert_matches_type(TaskGetResponse, task, path=["response"])
 
     @parametrize
     def test_raw_response_get(self, client: LabelStudio) -> None:
         response = client.tasks.with_raw_response.get(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -235,7 +235,7 @@ class TestTasks:
     @parametrize
     def test_streaming_response_get(self, client: LabelStudio) -> None:
         with client.tasks.with_streaming_response.get(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -271,7 +271,7 @@ class TestAsyncTasks:
             comment_authors=[0],
             comment_count=-2147483648,
             file_upload=0,
-            inner_id=-9223372036854776000,
+            inner_id=-9007199254740991,
             is_labeled=True,
             last_comment_updated_at=parse_datetime("2019-12-27T18:11:19.117Z"),
             meta={},
@@ -311,7 +311,7 @@ class TestAsyncTasks:
     @parametrize
     async def test_method_update(self, async_client: AsyncLabelStudio) -> None:
         task = await async_client.tasks.update(
-            "string",
+            id="id",
             data={},
         )
         assert_matches_type(TaskUpdateResponse, task, path=["response"])
@@ -319,13 +319,13 @@ class TestAsyncTasks:
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncLabelStudio) -> None:
         task = await async_client.tasks.update(
-            "string",
+            id="id",
             data={},
             cancelled_annotations=-2147483648,
             comment_authors=[0],
             comment_count=-2147483648,
             file_upload=0,
-            inner_id=-9223372036854776000,
+            inner_id=-9007199254740991,
             is_labeled=True,
             last_comment_updated_at=parse_datetime("2019-12-27T18:11:19.117Z"),
             meta={},
@@ -341,7 +341,7 @@ class TestAsyncTasks:
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncLabelStudio) -> None:
         response = await async_client.tasks.with_raw_response.update(
-            "string",
+            id="id",
             data={},
         )
 
@@ -353,7 +353,7 @@ class TestAsyncTasks:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncLabelStudio) -> None:
         async with async_client.tasks.with_streaming_response.update(
-            "string",
+            id="id",
             data={},
         ) as response:
             assert not response.is_closed
@@ -368,7 +368,7 @@ class TestAsyncTasks:
     async def test_path_params_update(self, async_client: AsyncLabelStudio) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.tasks.with_raw_response.update(
-                "",
+                id="",
                 data={},
             )
 
@@ -411,14 +411,14 @@ class TestAsyncTasks:
     @parametrize
     async def test_method_delete(self, async_client: AsyncLabelStudio) -> None:
         task = await async_client.tasks.delete(
-            "string",
+            "id",
         )
         assert task is None
 
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncLabelStudio) -> None:
         response = await async_client.tasks.with_raw_response.delete(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -429,7 +429,7 @@ class TestAsyncTasks:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncLabelStudio) -> None:
         async with async_client.tasks.with_streaming_response.delete(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -449,14 +449,14 @@ class TestAsyncTasks:
     @parametrize
     async def test_method_get(self, async_client: AsyncLabelStudio) -> None:
         task = await async_client.tasks.get(
-            "string",
+            "id",
         )
         assert_matches_type(TaskGetResponse, task, path=["response"])
 
     @parametrize
     async def test_raw_response_get(self, async_client: AsyncLabelStudio) -> None:
         response = await async_client.tasks.with_raw_response.get(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -467,7 +467,7 @@ class TestAsyncTasks:
     @parametrize
     async def test_streaming_response_get(self, async_client: AsyncLabelStudio) -> None:
         async with async_client.tasks.with_streaming_response.get(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

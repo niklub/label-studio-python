@@ -31,7 +31,7 @@ class TestMl:
     def test_method_create_with_all_params(self, client: LabelStudio) -> None:
         ml = client.ml.create(
             project=0,
-            url="string",
+            url="url",
         )
         assert_matches_type(MlCreateResponse, ml, path=["response"])
 
@@ -58,7 +58,7 @@ class TestMl:
     @parametrize
     def test_method_update(self, client: LabelStudio) -> None:
         ml = client.ml.update(
-            0,
+            id=0,
             project=0,
             url="x",
         )
@@ -67,27 +67,27 @@ class TestMl:
     @parametrize
     def test_method_update_with_all_params(self, client: LabelStudio) -> None:
         ml = client.ml.update(
-            0,
+            id=0,
             project=0,
             url="x",
             auth_method="NONE",
             auto_update=True,
-            basic_auth_pass="string",
-            basic_auth_user="string",
-            description="string",
-            error_message="string",
+            basic_auth_pass="basic_auth_pass",
+            basic_auth_user="basic_auth_user",
+            description="description",
+            error_message="error_message",
             extra_params={},
             is_interactive=True,
-            model_version="string",
+            model_version="model_version",
             state="CO",
-            title="string",
+            title="title",
         )
         assert_matches_type(MlUpdateResponse, ml, path=["response"])
 
     @parametrize
     def test_raw_response_update(self, client: LabelStudio) -> None:
         response = client.ml.with_raw_response.update(
-            0,
+            id=0,
             project=0,
             url="x",
         )
@@ -100,7 +100,7 @@ class TestMl:
     @parametrize
     def test_streaming_response_update(self, client: LabelStudio) -> None:
         with client.ml.with_streaming_response.update(
-            0,
+            id=0,
             project=0,
             url="x",
         ) as response:
@@ -219,7 +219,7 @@ class TestAsyncMl:
     async def test_method_create_with_all_params(self, async_client: AsyncLabelStudio) -> None:
         ml = await async_client.ml.create(
             project=0,
-            url="string",
+            url="url",
         )
         assert_matches_type(MlCreateResponse, ml, path=["response"])
 
@@ -246,7 +246,7 @@ class TestAsyncMl:
     @parametrize
     async def test_method_update(self, async_client: AsyncLabelStudio) -> None:
         ml = await async_client.ml.update(
-            0,
+            id=0,
             project=0,
             url="x",
         )
@@ -255,27 +255,27 @@ class TestAsyncMl:
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncLabelStudio) -> None:
         ml = await async_client.ml.update(
-            0,
+            id=0,
             project=0,
             url="x",
             auth_method="NONE",
             auto_update=True,
-            basic_auth_pass="string",
-            basic_auth_user="string",
-            description="string",
-            error_message="string",
+            basic_auth_pass="basic_auth_pass",
+            basic_auth_user="basic_auth_user",
+            description="description",
+            error_message="error_message",
             extra_params={},
             is_interactive=True,
-            model_version="string",
+            model_version="model_version",
             state="CO",
-            title="string",
+            title="title",
         )
         assert_matches_type(MlUpdateResponse, ml, path=["response"])
 
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncLabelStudio) -> None:
         response = await async_client.ml.with_raw_response.update(
-            0,
+            id=0,
             project=0,
             url="x",
         )
@@ -288,7 +288,7 @@ class TestAsyncMl:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncLabelStudio) -> None:
         async with async_client.ml.with_streaming_response.update(
-            0,
+            id=0,
             project=0,
             url="x",
         ) as response:

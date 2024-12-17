@@ -29,9 +29,7 @@ from ....._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ....._base_client import (
-    make_request_options,
-)
+from ....._base_client import make_request_options
 from .....types.api.dataset_storages import (
     azure_list_params,
     azure_create_params,
@@ -52,10 +50,21 @@ class AzureResource(SyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> AzureResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#accessing-raw-response-data-eg-headers
+        """
         return AzureResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AzureResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#with_streaming_response
+        """
         return AzureResourceWithStreamingResponse(self)
 
     def create(
@@ -612,10 +621,21 @@ class AsyncAzureResource(AsyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> AsyncAzureResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncAzureResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncAzureResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#with_streaming_response
+        """
         return AsyncAzureResourceWithStreamingResponse(self)
 
     async def create(

@@ -17,9 +17,7 @@ from ....._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ....._base_client import (
-    make_request_options,
-)
+from ....._base_client import make_request_options
 from .....types.api.dataset_storages.azure import column_retrieve_params
 
 __all__ = ["ColumnsResource", "AsyncColumnsResource"]
@@ -28,10 +26,21 @@ __all__ = ["ColumnsResource", "AsyncColumnsResource"]
 class ColumnsResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> ColumnsResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#accessing-raw-response-data-eg-headers
+        """
         return ColumnsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> ColumnsResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#with_streaming_response
+        """
         return ColumnsResourceWithStreamingResponse(self)
 
     def retrieve(
@@ -77,10 +86,21 @@ class ColumnsResource(SyncAPIResource):
 class AsyncColumnsResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncColumnsResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncColumnsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncColumnsResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#with_streaming_response
+        """
         return AsyncColumnsResourceWithStreamingResponse(self)
 
     async def retrieve(

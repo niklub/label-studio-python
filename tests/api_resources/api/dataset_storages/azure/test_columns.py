@@ -18,22 +18,22 @@ class TestColumns:
     @parametrize
     def test_method_retrieve(self, client: LabelStudio) -> None:
         column = client.api.dataset_storages.azure.columns.retrieve(
-            0,
+            id=0,
         )
         assert column is None
 
     @parametrize
     def test_method_retrieve_with_all_params(self, client: LabelStudio) -> None:
         column = client.api.dataset_storages.azure.columns.retrieve(
-            0,
-            ordering="string",
+            id=0,
+            ordering="ordering",
         )
         assert column is None
 
     @parametrize
     def test_raw_response_retrieve(self, client: LabelStudio) -> None:
         response = client.api.dataset_storages.azure.columns.with_raw_response.retrieve(
-            0,
+            id=0,
         )
 
         assert response.is_closed is True
@@ -44,7 +44,7 @@ class TestColumns:
     @parametrize
     def test_streaming_response_retrieve(self, client: LabelStudio) -> None:
         with client.api.dataset_storages.azure.columns.with_streaming_response.retrieve(
-            0,
+            id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -61,22 +61,22 @@ class TestAsyncColumns:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncLabelStudio) -> None:
         column = await async_client.api.dataset_storages.azure.columns.retrieve(
-            0,
+            id=0,
         )
         assert column is None
 
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncLabelStudio) -> None:
         column = await async_client.api.dataset_storages.azure.columns.retrieve(
-            0,
-            ordering="string",
+            id=0,
+            ordering="ordering",
         )
         assert column is None
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncLabelStudio) -> None:
         response = await async_client.api.dataset_storages.azure.columns.with_raw_response.retrieve(
-            0,
+            id=0,
         )
 
         assert response.is_closed is True
@@ -87,7 +87,7 @@ class TestAsyncColumns:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncLabelStudio) -> None:
         async with async_client.api.dataset_storages.azure.columns.with_streaming_response.retrieve(
-            0,
+            id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

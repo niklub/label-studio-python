@@ -23,7 +23,7 @@ class TestDatasetStorages:
     @parametrize
     def test_method_list_with_all_params(self, client: LabelStudio) -> None:
         dataset_storage = client.api.dataset_storages.list(
-            ordering="string",
+            ordering="ordering",
         )
         assert dataset_storage is None
 
@@ -59,7 +59,7 @@ class TestAsyncDatasetStorages:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncLabelStudio) -> None:
         dataset_storage = await async_client.api.dataset_storages.list(
-            ordering="string",
+            ordering="ordering",
         )
         assert dataset_storage is None
 

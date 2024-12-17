@@ -32,23 +32,23 @@ class TestProjects:
     @parametrize
     def test_method_create_with_all_params(self, client: LabelStudio) -> None:
         project = client.projects.create(
-            color="string",
+            color="color",
             control_weights={},
             created_by={
-                "first_name": "string",
-                "last_name": "string",
                 "email": "dev@stainlessapi.com",
+                "first_name": "first_name",
+                "last_name": "last_name",
             },
-            description="string",
+            description="description",
             enable_empty_annotation=True,
             evaluate_predictions_automatically=True,
-            expert_instruction="string",
+            expert_instruction="expert_instruction",
             is_draft=True,
             is_published=True,
-            label_config="string",
+            label_config="label_config",
             maximum_annotations=-2147483648,
             min_annotations_to_start_training=-2147483648,
-            model_version="string",
+            model_version="model_version",
             organization=0,
             overlap_cohort_percentage=-2147483648,
             pinned_at=parse_datetime("2019-12-27T18:11:19.117Z"),
@@ -61,8 +61,8 @@ class TestProjects:
             show_overlap_first=True,
             show_skip_button=True,
             skip_queue="REQUEUE_FOR_ME",
-            task_data_login="string",
-            task_data_password="string",
+            task_data_login="task_data_login",
+            task_data_password="task_data_password",
             title="xxx",
             workspace=0,
         )
@@ -91,31 +91,31 @@ class TestProjects:
     @parametrize
     def test_method_update(self, client: LabelStudio) -> None:
         project = client.projects.update(
-            0,
+            id=0,
         )
         assert_matches_type(ProjectUpdateResponse, project, path=["response"])
 
     @parametrize
     def test_method_update_with_all_params(self, client: LabelStudio) -> None:
         project = client.projects.update(
-            0,
-            color="string",
+            id=0,
+            color="color",
             control_weights={},
             created_by={
-                "first_name": "string",
-                "last_name": "string",
                 "email": "dev@stainlessapi.com",
+                "first_name": "first_name",
+                "last_name": "last_name",
             },
-            description="string",
+            description="description",
             enable_empty_annotation=True,
             evaluate_predictions_automatically=True,
-            expert_instruction="string",
+            expert_instruction="expert_instruction",
             is_draft=True,
             is_published=True,
-            label_config="string",
+            label_config="label_config",
             maximum_annotations=-2147483648,
             min_annotations_to_start_training=-2147483648,
-            model_version="string",
+            model_version="model_version",
             organization=0,
             overlap_cohort_percentage=-2147483648,
             pinned_at=parse_datetime("2019-12-27T18:11:19.117Z"),
@@ -128,8 +128,8 @@ class TestProjects:
             show_overlap_first=True,
             show_skip_button=True,
             skip_queue="REQUEUE_FOR_ME",
-            task_data_login="string",
-            task_data_password="string",
+            task_data_login="task_data_login",
+            task_data_password="task_data_password",
             title="xxx",
         )
         assert_matches_type(ProjectUpdateResponse, project, path=["response"])
@@ -137,7 +137,7 @@ class TestProjects:
     @parametrize
     def test_raw_response_update(self, client: LabelStudio) -> None:
         response = client.projects.with_raw_response.update(
-            0,
+            id=0,
         )
 
         assert response.is_closed is True
@@ -148,7 +148,7 @@ class TestProjects:
     @parametrize
     def test_streaming_response_update(self, client: LabelStudio) -> None:
         with client.projects.with_streaming_response.update(
-            0,
+            id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -166,12 +166,12 @@ class TestProjects:
     @parametrize
     def test_method_list_with_all_params(self, client: LabelStudio) -> None:
         project = client.projects.list(
-            ids="string",
-            ordering="string",
+            ids="ids",
+            ordering="ordering",
             page=0,
             page_size=0,
-            title="string",
-            workspaces="string",
+            title="title",
+            workspaces="workspaces",
         )
         assert_matches_type(SyncLsOffsetPage[ProjectListResponse], project, path=["response"])
 
@@ -269,23 +269,23 @@ class TestAsyncProjects:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncLabelStudio) -> None:
         project = await async_client.projects.create(
-            color="string",
+            color="color",
             control_weights={},
             created_by={
-                "first_name": "string",
-                "last_name": "string",
                 "email": "dev@stainlessapi.com",
+                "first_name": "first_name",
+                "last_name": "last_name",
             },
-            description="string",
+            description="description",
             enable_empty_annotation=True,
             evaluate_predictions_automatically=True,
-            expert_instruction="string",
+            expert_instruction="expert_instruction",
             is_draft=True,
             is_published=True,
-            label_config="string",
+            label_config="label_config",
             maximum_annotations=-2147483648,
             min_annotations_to_start_training=-2147483648,
-            model_version="string",
+            model_version="model_version",
             organization=0,
             overlap_cohort_percentage=-2147483648,
             pinned_at=parse_datetime("2019-12-27T18:11:19.117Z"),
@@ -298,8 +298,8 @@ class TestAsyncProjects:
             show_overlap_first=True,
             show_skip_button=True,
             skip_queue="REQUEUE_FOR_ME",
-            task_data_login="string",
-            task_data_password="string",
+            task_data_login="task_data_login",
+            task_data_password="task_data_password",
             title="xxx",
             workspace=0,
         )
@@ -328,31 +328,31 @@ class TestAsyncProjects:
     @parametrize
     async def test_method_update(self, async_client: AsyncLabelStudio) -> None:
         project = await async_client.projects.update(
-            0,
+            id=0,
         )
         assert_matches_type(ProjectUpdateResponse, project, path=["response"])
 
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncLabelStudio) -> None:
         project = await async_client.projects.update(
-            0,
-            color="string",
+            id=0,
+            color="color",
             control_weights={},
             created_by={
-                "first_name": "string",
-                "last_name": "string",
                 "email": "dev@stainlessapi.com",
+                "first_name": "first_name",
+                "last_name": "last_name",
             },
-            description="string",
+            description="description",
             enable_empty_annotation=True,
             evaluate_predictions_automatically=True,
-            expert_instruction="string",
+            expert_instruction="expert_instruction",
             is_draft=True,
             is_published=True,
-            label_config="string",
+            label_config="label_config",
             maximum_annotations=-2147483648,
             min_annotations_to_start_training=-2147483648,
-            model_version="string",
+            model_version="model_version",
             organization=0,
             overlap_cohort_percentage=-2147483648,
             pinned_at=parse_datetime("2019-12-27T18:11:19.117Z"),
@@ -365,8 +365,8 @@ class TestAsyncProjects:
             show_overlap_first=True,
             show_skip_button=True,
             skip_queue="REQUEUE_FOR_ME",
-            task_data_login="string",
-            task_data_password="string",
+            task_data_login="task_data_login",
+            task_data_password="task_data_password",
             title="xxx",
         )
         assert_matches_type(ProjectUpdateResponse, project, path=["response"])
@@ -374,7 +374,7 @@ class TestAsyncProjects:
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncLabelStudio) -> None:
         response = await async_client.projects.with_raw_response.update(
-            0,
+            id=0,
         )
 
         assert response.is_closed is True
@@ -385,7 +385,7 @@ class TestAsyncProjects:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncLabelStudio) -> None:
         async with async_client.projects.with_streaming_response.update(
-            0,
+            id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -403,12 +403,12 @@ class TestAsyncProjects:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncLabelStudio) -> None:
         project = await async_client.projects.list(
-            ids="string",
-            ordering="string",
+            ids="ids",
+            ordering="ordering",
             page=0,
             page_size=0,
-            title="string",
-            workspaces="string",
+            title="title",
+            workspaces="workspaces",
         )
         assert_matches_type(AsyncLsOffsetPage[ProjectListResponse], project, path=["response"])
 

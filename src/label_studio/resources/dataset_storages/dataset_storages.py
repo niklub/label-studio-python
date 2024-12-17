@@ -2,22 +2,6 @@
 
 from __future__ import annotations
 
-from .s3 import (
-    S3Resource,
-    AsyncS3Resource,
-    S3ResourceWithRawResponse,
-    AsyncS3ResourceWithRawResponse,
-    S3ResourceWithStreamingResponse,
-    AsyncS3ResourceWithStreamingResponse,
-)
-from .gcs import (
-    GcsResource,
-    AsyncGcsResource,
-    GcsResourceWithRawResponse,
-    AsyncGcsResourceWithRawResponse,
-    GcsResourceWithStreamingResponse,
-    AsyncGcsResourceWithStreamingResponse,
-)
 from .azure import (
     AzureResource,
     AsyncAzureResource,
@@ -26,7 +10,14 @@ from .azure import (
     AzureResourceWithStreamingResponse,
     AsyncAzureResourceWithStreamingResponse,
 )
-from .s3.s3 import S3Resource, AsyncS3Resource
+from .s3.s3 import (
+    S3Resource,
+    AsyncS3Resource,
+    S3ResourceWithRawResponse,
+    AsyncS3ResourceWithRawResponse,
+    S3ResourceWithStreamingResponse,
+    AsyncS3ResourceWithStreamingResponse,
+)
 from .types import (
     TypesResource,
     AsyncTypesResource,
@@ -35,7 +26,14 @@ from .types import (
     TypesResourceWithStreamingResponse,
     AsyncTypesResourceWithStreamingResponse,
 )
-from .gcs.gcs import GcsResource, AsyncGcsResource
+from .gcs.gcs import (
+    GcsResource,
+    AsyncGcsResource,
+    GcsResourceWithRawResponse,
+    AsyncGcsResourceWithRawResponse,
+    GcsResourceWithStreamingResponse,
+    AsyncGcsResourceWithStreamingResponse,
+)
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 
@@ -61,10 +59,21 @@ class DatasetStoragesResource(SyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> DatasetStoragesResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#accessing-raw-response-data-eg-headers
+        """
         return DatasetStoragesResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> DatasetStoragesResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#with_streaming_response
+        """
         return DatasetStoragesResourceWithStreamingResponse(self)
 
 
@@ -87,10 +96,21 @@ class AsyncDatasetStoragesResource(AsyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> AsyncDatasetStoragesResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncDatasetStoragesResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncDatasetStoragesResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/niklub/label-studio-python#with_streaming_response
+        """
         return AsyncDatasetStoragesResourceWithStreamingResponse(self)
 
 
